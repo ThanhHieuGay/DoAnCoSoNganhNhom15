@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xổ Số Kiến Thiết - Tra Cứu Vé Số</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header >
+    <div class="top-bar">
+      <div class="help-support">
+        <a href="guide.html">Hướng dẫn</a> / 
+        <a href="contact.html">Hỗ trợ</a> / 
+        <a href="contact.html">Liên hệ</a>
+      </div>
+      <div class="call-us">
+        Gọi chúng tôi: (+84) 1234 567890
+      </div>
+      <div class="currency-language">
+        <select>
+          <option>VNĐ</option>
+        </select>
+        <select>
+          <option>Tiếng Việt</option>
+        </select>
+        <div class="dashboard">
+          <a href="login.html">Đăng nhập</a>
+          <a href="register.html">Đăng ký</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-header">
+      <div class="logo">
+        <h1>Xổ Số Kiến Thiết Phát Tài</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Trang Chủ</a></li>
+          <li><a href="check-lottery.html" class="active">Tra Cứu Vé Số</a></li>
+          <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
+          <li><a href="results.html">Kết Quả</a></li>
+          <li><a href="news.html">Tin Tức</a></li>
+          <li><a href="about.html">Giới Thiệu</a></li>
+          <li><a href="guide.html">Hướng Dẫn</a></li>
+          <li><a href="contact.html">Liên Hệ</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Trang Tra Cứu Vé Số -->
+  <section class="check-lottery">
+    <h2>Tra Cứu Vé Số</h2>
+    <p>Chọn miền, tỉnh và ngày để xem kết quả xổ số chi tiết.</p>
+
+    <form id="check-lottery-form">
+      <label for="mien">Miền:</label>
+      <select id="mien">
+        <option value="nam">Miền Nam</option>
+        <option value="trung">Miền Trung</option>
+        <option value="bac">Miền Bắc</option>
+      </select>
+
+      <label for="tinh">Tỉnh:</label>
+      <select id="tinh">
+        <option>TP. Hồ Chí Minh</option>
+        <option>Đồng Nai</option>
+        <option>Bình Dương</option>
+        <!-- Thêm các tỉnh khác nếu cần -->
+      </select>
+
+      <label for="ngay">Ngày xổ:</label>
+      <input type="date" id="ngay" required>
+
+      <button type="submit">Xem Kết Quả</button>
+    </form>
+
+    <!-- Bảng kết quả xổ số -->
+    <div id="lottery-result" style="margin-top: 30px; display:none;">
+      <h3>Kết Quả Xổ Số</h3>
+      <table class="lottery-table">
+        <thead>
+          <tr>
+            <th>Giải</th>
+            <th>Kết Quả</th>
+          </tr>
+        </thead>
+        <tbody id="lottery-body">
+          <!-- JS sẽ đổ dữ liệu vào -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="address">
+        <h4>Địa chỉ</h4>
+        <p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p>
+      </div>
+      <div class="mail">
+        <h4>Email</h4>
+        <p>info@xosokienthiet.vn</p>
+      </div>
+      <div class="phone">
+        <h4>Điện thoại</h4>
+        <p>(+84) 1234 567890</p>
+      </div>
+    </div>
+    <div class="newsletter">
+      <h4>Đăng ký nhận tin</h4>
+      <input type="email" placeholder="Email của bạn">
+      <button>Đăng ký</button>
+    </div>
+    <div class="links">
+      <ul>
+        <li><a href="about.html">Giới thiệu</a></li>
+        <li><a href="guide.html">Hướng dẫn</a></li>
+        <li><a href="contact.html">Liên hệ</a></li>
+      </ul>
+    </div>
+    <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    const form = document.getElementById('check-lottery-form');
+    const lotteryContainer = document.getElementById('lottery-result');
+    const lotteryBody = document.getElementById('lottery-body');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const mien = document.getElementById('mien').value;
+      const tinh = document.getElementById('tinh').value;
+      const ngay = document.getElementById('ngay').value;
+
+      // Dữ liệu giả lập
+      const ketQuaMau = {
+        dacbiet: "123456",
+        nhat: "654321",
+        nhi: ["112233", "445566"],
+        ba: ["778899", "990011"],
+        tu: ["12345", "67890", "11122", "33344", "55566", "77788", "99900"],
+        nam: ["22334", "55667", "88990"],
+        sau: ["1122", "3344", "5566"],
+        bay: ["778", "990", "223"],
+        tam: "45"
+      };
+
+      lotteryBody.innerHTML = `
+        <tr><td>Đặc Biệt</td><td class="highlight">${ketQuaMau.dacbiet}</td></tr>
+        <tr><td>Giải Nhất</td><td>${ketQuaMau.nhat}</td></tr>
+        <tr><td>Giải Nhì</td><td>${ketQuaMau.nhi.join(" - ")}</td></tr>
+        <tr><td>Giải Ba</td><td>${ketQuaMau.ba.join(" - ")}</td></tr>
+        <tr><td>Giải Tư</td><td>${ketQuaMau.tu.join(" - ")}</td></tr>
+        <tr><td>Giải Năm</td><td>${ketQuaMau.nam.join(" - ")}</td></tr>
+        <tr><td>Giải Sáu</td><td>${ketQuaMau.sau.join(" - ")}</td></tr>
+        <tr><td>Giải Bảy</td><td>${ketQuaMau.bay.join(" - ")}</td></tr>
+        <tr><td>Giải Tám</td><td>${ketQuaMau.tam}</td></tr>
+      `;
+      lotteryContainer.style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>

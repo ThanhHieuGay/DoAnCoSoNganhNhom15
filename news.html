@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xổ Số Kiến Thiết - Tin Tức</title>
+    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header (tương tự index.html) -->
+    <header >
+        <div class="top-bar">
+            <div class="help-support">
+                <a href="guide.html">Hướng dẫn</a> / 
+                <a href="contact.html">Hỗ trợ</a> / 
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="call-us">
+                Gọi chúng tôi: (+84) 1234 567890
+            </div>
+            <div class="currency-language">
+                <select>
+                    <option>VNĐ</option>
+                </select>
+                <select>
+                    <option>Tiếng Việt</option>
+                </select>
+                <div class="dashboard">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="register.html">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+                <h1>Xổ Số Kiến Thiết Phát Tài</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
+                    <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
+                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="news.html">Tin Tức</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="guide.html">Hướng Dẫn</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Trang tin tức chính -->
+    <section class="news-section">
+        <h2>Tin Tức & Thông Báo Xổ Số Kiến Thiết</h2>
+        <p>Cập nhật các tin tức mới nhất về xổ số, trúng thưởng lớn, chương trình khuyến mãi và hoạt động xã hội.</p>
+        
+        <div class="tabs">
+            <button class="tab active" data-type="all">Tất cả</button>
+            <button class="tab" data-type="new">Mới nhất</button>
+            <button class="tab" data-type="hot">Nổi bật</button>
+            <button class="tab" data-type="popular">Phổ biến</button>
+        </div>
+        
+        <div id="news-list" class="news-items">
+            <!-- Dữ liệu mẫu -->
+            <article data-type="new hot">
+                <span class="label new">New</span>
+                <h3>Người trúng Jackpot 92 tỷ đã nhận thưởng</h3>
+                <p>Khách hàng may mắn ở Hà Nội đã chính thức lĩnh thưởng Vietlott.</p>
+                <a href="#detail1">Xem thêm</a>
+            </article>
+            <article data-type="hot popular">
+                <span class="label hot">Hot</span>
+                <h3>Thống kê những con số thường xuất hiện trong tháng 9</h3>
+                <p>Tổng hợp từ 30 kỳ quay gần đây.</p>
+                <a href="#detail2">Xem thêm</a>
+            </article>
+            <article data-type="new">
+                <span class="label new">New</span>
+                <h3>Miền Nam khai trương thêm 2 đại lý mới</h3>
+                <p>Người dân có thêm lựa chọn mua vé số.</p>
+                <a href="#detail3">Xem thêm</a>
+            </article>
+            <!-- Thêm bài viết khác -->
+        </div>
+        
+        <div class="pagination">
+            <button disabled>«</button>
+            <button class="active">1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>»</button>
+        </div>
+    </section>
+
+    <!-- Footer (tương tự index.html) -->
+    <footer>
+        <div class="footer-content">
+            <div class="address">
+                <h4>Địa chỉ</h4>
+                <p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p>
+            </div>
+            <div class="mail">
+                <h4>Email</h4>
+                <p>info@xosokienthiet.vn</p>
+            </div>
+            <div class="phone">
+                <h4>Điện thoại</h4>
+                <p>(+84) 1234 567890</p>
+            </div>
+        </div>
+        <div class="newsletter">
+            <h4>Đăng ký nhận tin</h4>
+            <input type="email" placeholder="Email của bạn">
+            <button>Đăng ký</button>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="guide.html">Hướng dẫn</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
+    </footer>
+
+    <!-- JS để xử lý tab -->
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const newsItems = document.querySelectorAll('#news-list article');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const type = tab.dataset.type;
+
+                newsItems.forEach(item => {
+                    if (type === 'all' || item.dataset.type.includes(type)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Phân trang đơn giản (mẫu)
+        const paginationBtns = document.querySelectorAll('.pagination button');
+        paginationBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Xử lý phân trang (thay bằng API nếu cần)
+                alert('Đang tải trang tiếp theo...');
+            });
+        });
+    </script>
+
+</body>
+</html>

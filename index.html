@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xổ Số Kiến Thiết - Trang Chủ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header id="main-header">
+        <div class="top-bar">
+            <div class="help-support">
+                <a href="guide.html">Hướng dẫn</a> / 
+                <a href="contact.html">Hỗ trợ</a> / 
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="call-us">
+                Gọi chúng tôi: (+84) 1234 567890
+            </div>
+            <div class="currency-language">
+                <select><option>VNĐ</option></select>
+                <select><option>Tiếng Việt</option></select>
+                <div class="dashboard">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="register.html">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+                <h1>Xổ Số Kiến Thiết Phát Tài</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html" class="active">Trang Chủ</a></li>
+                    <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
+                    <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
+                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="news.html">Tin Tức</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="guide.html">Hướng Dẫn</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Bảng kết quả xổ số hiển thị trước -->
+    <section class="lottery-today">
+    <h2>Kết Quả Xổ Số Miền Nam - Ngày 25/09/2025</h2>
+    <div class="lottery-wrapper">
+        <table class="lottery-table">
+            <thead>
+                <tr><th>Giải</th><th>Kết Quả</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>Đặc Biệt</td><td class="highlight">123456</td></tr>
+                <tr><td>Giải Nhất</td><td>654321</td></tr>
+                <tr><td>Giải Nhì</td><td>112233 - 445566</td></tr>
+                <tr><td>Giải Ba</td><td>778899 - 990011</td></tr>
+                <tr><td>Giải Tư</td><td>12345 - 67890 - 11122 - 33344 - 55566 - 77788 - 99900</td></tr>
+                <tr><td>Giải Năm</td><td>22334 - 55667 - 88990</td></tr>
+                <tr><td>Giải Sáu</td><td>1122 - 3344 - 5566</td></tr>
+                <tr><td>Giải Bảy</td><td>778 - 990 - 223</td></tr>
+                <tr><td>Giải Tám</td><td>45</td></tr>
+            </tbody>
+        </table>
+    </div>
+    </section>
+
+    <!-- Tool dò vé thủ công -->
+    <section class="check-lottery">
+    <h2>Dò Vé Số Của Bạn</h2>
+    <p>Nhập số vé của bạn để hệ thống kiểm tra tự động.</p>
+    
+    <div class="form-wrapper">
+        <form id="check-form">
+            <label for="so-ve">Số vé (6 chữ số):</label>
+            <input type="text" id="so-ve" maxlength="6" placeholder="Ví dụ: 123456" required>
+            
+            <label for="mien">Miền:</label>
+            <select id="mien">
+                <option value="nam">Miền Nam</option>
+                <option value="trung">Miền Trung</option>
+                <option value="bac">Miền Bắc</option>
+            </select>
+            
+            <label for="tinh">Tỉnh:</label>
+            <select id="tinh">
+                <option>TP. Hồ Chí Minh</option>
+                <option>Đồng Nai</option>
+            </select>
+            
+            <label for="ngay">Ngày xổ:</label>
+            <input type="date" id="ngay" required>
+            
+            <button type="submit">Dò Vé</button>
+        </form>
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="address"><h4>Địa chỉ</h4><p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p></div>
+            <div class="mail"><h4>Email</h4><p>info@xosokienthiet.vn</p></div>
+            <div class="phone"><h4>Điện thoại</h4><p>(+84) 1234 567890</p></div>
+        </div>
+        <div class="newsletter">
+            <h4>Đăng ký nhận tin</h4>
+            <input type="email" placeholder="Email của bạn">
+            <button>Đăng ký</button>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="guide.html">Hướng dẫn</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
+    </footer>
+
+    <!-- JS -->
+    <script>
+        const form = document.getElementById('check-form');
+        const resultDiv = document.getElementById('result');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const soVe = document.getElementById('so-ve').value;
+
+            // Dữ liệu mẫu
+            const dacBiet = "123456";
+            const giaiNhat = "654321";
+
+            let ketQua = "Không trúng giải nào.";
+            if (soVe === dacBiet) ketQua = "Chúc mừng! Bạn trúng Giải Đặc Biệt.";
+            else if (soVe === giaiNhat) ketQua = "Bạn trúng Giải Nhất.";
+
+            resultDiv.innerHTML = `<p>${ketQua}</p>`;
+        });
+
+        
+    </script>
+    <script>
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            header.classList.add('shrink');
+        } else {
+            header.classList.remove('shrink');
+        }
+    });
+</script>
+
+</body>
+</html>

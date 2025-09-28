@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xổ Số Kiến Thiết - Quản Trị</title>
+    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header (tương tự index.html) -->
+    <header >
+        <div class="top-bar">
+            <div class="help-support">
+                <a href="guide.html">Hướng dẫn</a> / 
+                <a href="contact.html">Hỗ trợ</a> / 
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="call-us">
+                Gọi chúng tôi: (+84) 1234 567890
+            </div>
+            <div class="currency-language">
+                <select>
+                    <option>VNĐ</option>
+                </select>
+                <select>
+                    <option>Tiếng Việt</option>
+                </select>
+                <div class="dashboard">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="login.html#register">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+                <h1>Xổ Số Kiến Thiết Phát Tài</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
+                    <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
+                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="news.html">Tin Tức</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="guide.html">Hướng Dẫn</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Trang quản trị chính -->
+    <section class="admin" id="admin-section">
+        <h2>Quản Trị Hệ Thống</h2>
+        <p>Chào mừng Admin! Quản lý kết quả, tin tức và người dùng.</p>
+        
+        <div class="tabs">
+            <button class="tab active" data-tab="ketqua">Quản Lý Kết Quả</button>
+            <button class="tab" data-tab="tintuc">Quản Lý Tin Tức</button>
+            <button class="tab" data-tab="nguoidung">Quản Lý Người Dùng</button>
+            <button class="tab" data-tab="veso">Quản Lý Vé Số Người Dùng</button>
+        </div>
+
+        <!-- Quản lý Kết Quả -->
+        <div id="ketqua-tab" class="admin-tab active">
+            <h3>Thêm/Sửa Kết Quả Xổ Số</h3>
+            <form id="ketqua-form">
+                <label for="ngay-xo">Ngày Xổ:</label>
+                <input type="date" id="ngay-xo" required>
+                
+                <label for="mien-admin">Miền:</label>
+                <select id="mien-admin">
+                    <option value="nam">Miền Nam</option>
+                    <option value="trung">Miền Trung</option>
+                    <option value="bac">Miền Bắc</option>
+                </select>
+                
+                <label for="tinh-admin">Tỉnh:</label>
+                <input type="text" id="tinh-admin" required>
+                
+                <label for="giai-dac-biet">Giải Đặc Biệt:</label>
+                <input type="text" id="giai-dac-biet" required>
+                
+                <!-- Thêm trường cho các giải khác nếu cần -->
+                
+                <button type="submit">Thêm Kết Quả</button>
+            </form>
+            <div id="ketqua-list">
+                <h4>Danh Sách Kết Quả</h4>
+                <ul></ul>
+            </div>
+        </div>
+
+        <!-- Quản lý Tin Tức -->
+        <div id="tintuc-tab" class="admin-tab">
+            <h3>Thêm/Sửa Tin Tức</h3>
+            <form id="tintuc-form">
+                <label for="tieu-de">Tiêu Đề:</label>
+                <input type="text" id="tieu-de" required>
+                
+                <label for="noi-dung-tin">Nội Dung:</label>
+                <textarea id="noi-dung-tin" rows="5" required></textarea>
+                
+                <label for="loai-tin">Loại:</label>
+                <select id="loai-tin">
+                    <option>New</option>
+                    <option>Hot</option>
+                    <option>Popular</option>
+                </select>
+                
+                <button type="submit">Thêm Tin Tức</button>
+            </form>
+            <div id="tintuc-list">
+                <h4>Danh Sách Tin Tức</h4>
+                <ul></ul>
+            </div>
+        </div>
+
+        <!-- Quản lý Người Dùng -->
+        <div id="nguoidung-tab" class="admin-tab">
+            <h3>Quản Lý Người Dùng</h3>
+            <div id="nguoidung-list">
+                <h4>Danh Sách Người Dùng</h4>
+                <ul></ul>
+            </div>
+        </div>
+
+        <!-- Quản lý Vé Số Người Dùng -->
+        <div id="veso-tab" class="admin-tab">
+            <h3>Quản Lý Vé Số Người Dùng</h3>
+            <div id="veso-list">
+                <h4>Danh Sách Vé Đã Dò</h4>
+                <ul></ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (tương tự index.html) -->
+    <footer>
+        <div class="footer-content">
+            <div class="address">
+                <h4>Địa chỉ</h4>
+                <p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p>
+            </div>
+            <div class="mail">
+                <h4>Email</h4>
+                <p>info@xosokienthiet.vn</p>
+            </div>
+            <div class="phone">
+                <h4>Điện thoại</h4>
+                <p>(+84) 1234 567890</p>
+            </div>
+        </div>
+        <div class="newsletter">
+            <h4>Đăng ký nhận tin</h4>
+            <input type="email" placeholder="Email của bạn">
+            <button>Đăng ký</button>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="guide.html">Hướng dẫn</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
+    </footer>
+
+    <!-- JS để xử lý tab và form (simulate) -->
+    <script>
+        // Kiểm tra quyền admin
+        if (localStorage.getItem('user') !== 'admin@xosokienthiet.vn') {
+            alert('Bạn cần đăng nhập với quyền admin để truy cập trang này.');
+            window.location.href = 'login.html';
+        }
+
+        const tabs = document.querySelectorAll('.tab');
+        const adminTabs = document.querySelectorAll('.admin-tab');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                adminTabs.forEach(f => f.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
+            });
+        });
+
+        // Simulate danh sách (sử dụng localStorage)
+        function loadList(listId, storageKey) {
+            const list = document.querySelector(`#${listId} ul`);
+            const data = JSON.parse(localStorage.getItem(storageKey)) || [];
+            list.innerHTML = '';
+            data.forEach((item, index) => {
+                const li = document.createElement('li');
+                li.textContent = JSON.stringify(item);
+                const deleteBtn = document.createElement('button');
+                deleteBtn.textContent = 'Xóa';
+                deleteBtn.onclick = () => {
+                    data.splice(index, 1);
+                    localStorage.setItem(storageKey, JSON.stringify(data));
+                    loadList(listId, storageKey);
+                };
+                li.appendChild(deleteBtn);
+                list.appendChild(li);
+            });
+        }
+
+        // Quản lý kết quả
+        document.getElementById('ketqua-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const ngay = document.getElementById('ngay-xo').value;
+            const mien = document.getElementById('mien-admin').value;
+            const tinh = document.getElementById('tinh-admin').value;
+            const giaiDB = document.getElementById('giai-dac-biet').value;
+            const data = JSON.parse(localStorage.getItem('ketqua')) || [];
+            data.push({ ngay, mien, tinh, giaiDB });
+            localStorage.setItem('ketqua', JSON.stringify(data));
+            loadList('ketqua-list', 'ketqua');
+            e.target.reset();
+        });
+        loadList('ketqua-list', 'ketqua');
+
+        // Quản lý tin tức
+        document.getElementById('tintuc-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const tieuDe = document.getElementById('tieu-de').value;
+            const noiDung = document.getElementById('noi-dung-tin').value;
+            const loai = document.getElementById('loai-tin').value;
+            const data = JSON.parse(localStorage.getItem('tintuc')) || [];
+            data.push({ tieuDe, noiDung, loai });
+            localStorage.setItem('tintuc', JSON.stringify(data));
+            loadList('tintuc-list', 'tintuc');
+            e.target.reset();
+        });
+        loadList('tintuc-list', 'tintuc');
+
+        // Quản lý người dùng (simulate)
+        const users = [{ email: 'user1@example.com', role: 'user' }, { email: 'admin@example.com', role: 'admin' }];
+        localStorage.setItem('nguoidung', JSON.stringify(users));
+        loadList('nguoidung-list', 'nguoidung');
+
+        // Quản lý vé số người dùng (từ check-lottery.html)
+        loadList('veso-list', 'lotteryHistory');
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xổ Số Kiến Thiết - Lịch Mở Thưởng</title>
+    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header (tương tự index.html) -->
+    <header >
+        <div class="top-bar">
+            <div class="help-support">
+                <a href="guide.html">Hướng dẫn</a> / 
+                <a href="contact.html">Hỗ trợ</a> / 
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="call-us">
+                Gọi chúng tôi: (+84) 1234 567890
+            </div>
+            <div class="currency-language">
+                <select>
+                    <option>VNĐ</option>
+                </select>
+                <select>
+                    <option>Tiếng Việt</option>
+                </select>
+                <div class="dashboard">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="register.html">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+                <h1>Xổ Số Kiến Thiết Phát Tài</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
+                    <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
+                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="news.html">Tin Tức</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="guide.html">Hướng Dẫn</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Trang lịch mở thưởng chính -->
+    <section class="schedule">
+        <h2>Lịch Mở Thưởng Xổ Số</h2>
+        <p>Chọn ngày để xem các tỉnh mở thưởng hoặc xem lịch mặc định trong tuần.</p>
+        <form id="schedule-form">
+            <label for="ngay">Chọn ngày:</label>
+            <input type="date" id="ngay" required>
+            <button type="submit">Xem Lịch</button>
+        </form>
+        
+        <div id="schedule-result" style="margin-top: 20px;">
+            <!-- Kết quả lịch sẽ hiển thị ở đây -->
+            <h3>Lịch Mở Thưởng Theo Ngày</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Miền</th>
+                        <th>Tỉnh</th>
+                        <th>Xem Kết Quả</th>
+                    </tr>
+                </thead>
+                <tbody id="schedule-table">
+                    <!-- Dữ liệu mẫu -->
+                    <tr>
+                        <td>24/09/2025</td>
+                        <td>Miền Nam</td>
+                        <td>TP. Hồ Chí Minh, Đồng Nai</td>
+                        <td><a href="results.html?ngay=2025-09-24&tinh=tphcm">Xem</a></td>
+                    </tr>
+                    <tr>
+                        <td>25/09/2025</td>
+                        <td>Miền Nam</td>
+                        <td>An Giang, Bình Thuận</td>
+                        <td><a href="results.html?ngay=2025-09-25&tinh=angiang">Xem</a></td>
+                    </tr>
+                    <!-- Thêm dữ liệu khác -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="weekly-schedule" style="margin-top: 40px;">
+            <h3>Lịch Mở Thưởng Theo Tuần</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Thứ</th>
+                        <th>Miền Nam</th>
+                        <th>Miền Trung</th>
+                        <th>Miền Bắc</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Thứ Hai</td>
+                        <td>TP. HCM, Đồng Tháp</td>
+                        <td>Phú Yên, Huế</td>
+                        <td>Hà Nội</td>
+                    </tr>
+                    <!-- Thêm các ngày khác -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Footer (tương tự index.html) -->
+    <footer>
+        <div class="footer-content">
+            <div class="address">
+                <h4>Địa chỉ</h4>
+                <p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p>
+            </div>
+            <div class="mail">
+                <h4>Email</h4>
+                <p>info@xosokienthiet.vn</p>
+            </div>
+            <div class="phone">
+                <h4>Điện thoại</h4>
+                <p>(+84) 1234 567890</p>
+            </div>
+        </div>
+        <div class="newsletter">
+            <h4>Đăng ký nhận tin</h4>
+            <input type="email" placeholder="Email của bạn">
+            <button>Đăng ký</button>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="guide.html">Hướng dẫn</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
+    </footer>
+
+    <!-- JS để xử lý form và lịch -->
+    <script>
+        const form = document.getElementById('schedule-form');
+        const scheduleTable = document.getElementById('schedule-table');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const ngay = document.getElementById('ngay').value;
+
+            // Simulate dữ liệu lịch (thay bằng API backend thực tế)
+            const sampleData = {
+                '2025-09-24': [
+                    { mien: 'Miền Nam', tinh: 'TP. Hồ Chí Minh, Đồng Nai', link: 'results.html?ngay=2025-09-24&tinh=tphcm' },
+                    { mien: 'Miền Trung', tinh: 'Khánh Hòa', link: 'results.html?ngay=2025-09-24&tinh=khanhhoa' }
+                ],
+                '2025-09-25': [
+                    { mien: 'Miền Nam', tinh: 'An Giang, Bình Thuận', link: 'results.html?ngay=2025-09-25&tinh=angiang' }
+                ]
+            };
+
+            const data = sampleData[ngay] || [];
+            scheduleTable.innerHTML = '';
+            if (data.length === 0) {
+                scheduleTable.innerHTML = '<tr><td colspan="4">Không có lịch mở thưởng cho ngày này.</td></tr>';
+                return;
+            }
+
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${ngay}</td>
+                    <td>${item.mien}</td>
+                    <td>${item.tinh}</td>
+                    <td><a href="${item.link}">Xem</a></td>
+                `;
+                scheduleTable.appendChild(row);
+            });
+        });
+    </script>
+
+</body>
+</html>

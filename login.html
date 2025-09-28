@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xổ Số Kiến Thiết - Đăng Nhập/Đăng Ký</title>
+    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Header (tương tự index.html) -->
+    <header>
+        <div class="top-bar">
+            <div class="help-support">
+                <a href="guide.html">Hướng dẫn</a> / 
+                <a href="contact.html">Hỗ trợ</a> / 
+                <a href="contact.html">Liên hệ</a>
+            </div>
+            <div class="call-us">
+                Gọi chúng tôi: (+84) 1234 567890
+            </div>
+            <div class="currency-language">
+                <select>
+                    <option>VNĐ</option>
+                </select>
+                <select>
+                    <option>Tiếng Việt</option>
+                </select>
+                <div class="dashboard">
+                    <a href="login.html">Đăng nhập</a>
+                    <a href="login.html#register">Đăng ký</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-header">
+            <div class="logo">
+                <h1>Xổ Số Kiến Thiết Phát Tài</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Trang Chủ</a></li>
+                    <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
+                    <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
+                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="news.html">Tin Tức</a></li>
+                    <li><a href="about.html">Giới Thiệu</a></li>
+                    <li><a href="guide.html">Hướng Dẫn</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Trang đăng nhập/đăng ký chính -->
+    <section class="auth">
+        <h2>Đăng Nhập hoặc Đăng Ký</h2>
+        <div class="tabs">
+            <button class="tab active" data-tab="login">Đăng Nhập</button>
+            <button class="tab" data-tab="register">Đăng Ký</button>
+        </div>
+
+        <!-- Form Đăng nhập -->
+        <div id="login-form" class="auth-form active">
+            <form id="login">
+                <label for="login-email">Email hoặc Số Điện Thoại:</label>
+                <input type="text" id="login-email" required>
+                
+                <label for="login-password">Mật Khẩu:</label>
+                <input type="password" id="login-password" required>
+                
+                <button type="submit">Đăng Nhập</button>
+                <a href="#forgot-password">Quên mật khẩu?</a>
+            </form>
+        </div>
+
+        <!-- Form Đăng ký -->
+        <div id="register-form" class="auth-form">
+            <form id="register">
+                <label for="register-ho-ten">Họ Tên:</label>
+                <input type="text" id="register-ho-ten" required>
+                
+                <label for="register-email">Email:</label>
+                <input type="email" id="register-email" required>
+                
+                <label for="register-dien-thoai">Số Điện Thoại:</label>
+                <input type="tel" id="register-dien-thoai" required>
+                
+                <label for="register-password">Mật Khẩu:</label>
+                <input type="password" id="register-password" required>
+                
+                <label for="register-confirm-password">Xác Nhận Mật Khẩu:</label>
+                <input type="password" id="register-confirm-password" required>
+                
+                <button type="submit">Đăng Ký</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer (tương tự index.html) -->
+    <footer>
+        <div class="footer-content">
+            <div class="address">
+                <h4>Địa chỉ</h4>
+                <p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p>
+            </div>
+            <div class="mail">
+                <h4>Email</h4>
+                <p>info@xosokienthiet.vn</p>
+            </div>
+            <div class="phone">
+                <h4>Điện thoại</h4>
+                <p>(+84) 1234 567890</p>
+            </div>
+        </div>
+        <div class="newsletter">
+            <h4>Đăng ký nhận tin</h4>
+            <input type="email" placeholder="Email của bạn">
+            <button>Đăng ký</button>
+        </div>
+        <div class="links">
+            <ul>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="guide.html">Hướng dẫn</a></li>
+                <li><a href="contact.html">Liên hệ</a></li>
+            </ul>
+        </div>
+        <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
+    </footer>
+
+    <!-- JS để xử lý tab và form -->
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const forms = document.querySelectorAll('.auth-form');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                forms.forEach(f => f.classList.remove('active'));
+                tab.classList.add('active');
+                document.getElementById(`${tab.dataset.tab}-form`).classList.add('active');
+            });
+        });
+
+        // Xử lý đăng nhập
+        document.getElementById('login').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            // Simulate xác thực (thay bằng API backend)
+            if (email === 'user@xosokienthiet.vn' && password === 'password123') {
+                alert('Đăng nhập thành công! Chuyển hướng đến trang cá nhân...');
+                // Trong thực tế: lưu session và chuyển hướng
+                localStorage.setItem('user', email);
+                window.location.href = 'index.html';
+            } else {
+                alert('Email hoặc mật khẩu không đúng.');
+            }
+        });
+
+        // Xử lý đăng ký
+        document.getElementById('register').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const hoTen = document.getElementById('register-ho-ten').value;
+            const email = document.getElementById('register-email').value;
+            const dienThoai = document.getElementById('register-dien-thoai').value;
+            const password = document.getElementById('register-password').value;
+            const confirmPassword = document.getElementById('register-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Mật khẩu xác nhận không khớp.');
+                return;
+            }
+
+            // Simulate gửi dữ liệu (thay bằng API backend)
+            alert(`Đăng ký thành công cho ${hoTen}! Email: ${email}, SĐT: ${dienThoai}`);
+            document.getElementById('register').reset();
+        });
+    </script>
+
+</body>
+</html>
