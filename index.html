@@ -38,7 +38,7 @@
                     <li><a href="index.html" class="active">Trang Chủ</a></li>
                     <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
                     <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
-                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="buy-lottery.html">Mua Số</a></li>
                     <li><a href="news.html">Tin Tức</a></li>
                     <li><a href="about.html">Giới Thiệu</a></li>
                     <li><a href="guide.html">Hướng Dẫn</a></li>
@@ -125,38 +125,7 @@
         <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
     </footer>
 
-    <!-- JS -->
-    <script>
-        const form = document.getElementById('check-form');
-        const resultDiv = document.getElementById('result');
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const soVe = document.getElementById('so-ve').value;
-
-            // Dữ liệu mẫu
-            const dacBiet = "123456";
-            const giaiNhat = "654321";
-
-            let ketQua = "Không trúng giải nào.";
-            if (soVe === dacBiet) ketQua = "Chúc mừng! Bạn trúng Giải Đặc Biệt.";
-            else if (soVe === giaiNhat) ketQua = "Bạn trúng Giải Nhất.";
-
-            resultDiv.innerHTML = `<p>${ketQua}</p>`;
-        });
-
-        
-    </script>
-    <script>
-    const header = document.getElementById('main-header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            header.classList.add('shrink');
-        } else {
-            header.classList.remove('shrink');
-        }
-    });
-</script>
+    <script src="main.js"></script>
 
 </body>
 </html>

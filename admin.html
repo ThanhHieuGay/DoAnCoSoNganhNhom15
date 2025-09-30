@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xổ Số Kiến Thiết - Quản Trị</title>
-    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -43,7 +42,7 @@
                     <li><a href="index.html">Trang Chủ</a></li>
                     <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
                     <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
-                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="buy-lottery.html">Mua Số</a></li>
                     <li><a href="news.html">Tin Tức</a></li>
                     <li><a href="about.html">Giới Thiệu</a></li>
                     <li><a href="guide.html">Hướng Dẫn</a></li>
@@ -170,83 +169,7 @@
         <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
     </footer>
 
-    <!-- JS để xử lý tab và form (simulate) -->
-    <script>
-        // Kiểm tra quyền admin
-        if (localStorage.getItem('user') !== 'admin@xosokienthiet.vn') {
-            alert('Bạn cần đăng nhập với quyền admin để truy cập trang này.');
-            window.location.href = 'login.html';
-        }
-
-        const tabs = document.querySelectorAll('.tab');
-        const adminTabs = document.querySelectorAll('.admin-tab');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                adminTabs.forEach(f => f.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(`${tab.dataset.tab}-tab`).classList.add('active');
-            });
-        });
-
-        // Simulate danh sách (sử dụng localStorage)
-        function loadList(listId, storageKey) {
-            const list = document.querySelector(`#${listId} ul`);
-            const data = JSON.parse(localStorage.getItem(storageKey)) || [];
-            list.innerHTML = '';
-            data.forEach((item, index) => {
-                const li = document.createElement('li');
-                li.textContent = JSON.stringify(item);
-                const deleteBtn = document.createElement('button');
-                deleteBtn.textContent = 'Xóa';
-                deleteBtn.onclick = () => {
-                    data.splice(index, 1);
-                    localStorage.setItem(storageKey, JSON.stringify(data));
-                    loadList(listId, storageKey);
-                };
-                li.appendChild(deleteBtn);
-                list.appendChild(li);
-            });
-        }
-
-        // Quản lý kết quả
-        document.getElementById('ketqua-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const ngay = document.getElementById('ngay-xo').value;
-            const mien = document.getElementById('mien-admin').value;
-            const tinh = document.getElementById('tinh-admin').value;
-            const giaiDB = document.getElementById('giai-dac-biet').value;
-            const data = JSON.parse(localStorage.getItem('ketqua')) || [];
-            data.push({ ngay, mien, tinh, giaiDB });
-            localStorage.setItem('ketqua', JSON.stringify(data));
-            loadList('ketqua-list', 'ketqua');
-            e.target.reset();
-        });
-        loadList('ketqua-list', 'ketqua');
-
-        // Quản lý tin tức
-        document.getElementById('tintuc-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const tieuDe = document.getElementById('tieu-de').value;
-            const noiDung = document.getElementById('noi-dung-tin').value;
-            const loai = document.getElementById('loai-tin').value;
-            const data = JSON.parse(localStorage.getItem('tintuc')) || [];
-            data.push({ tieuDe, noiDung, loai });
-            localStorage.setItem('tintuc', JSON.stringify(data));
-            loadList('tintuc-list', 'tintuc');
-            e.target.reset();
-        });
-        loadList('tintuc-list', 'tintuc');
-
-        // Quản lý người dùng (simulate)
-        const users = [{ email: 'user1@example.com', role: 'user' }, { email: 'admin@example.com', role: 'admin' }];
-        localStorage.setItem('nguoidung', JSON.stringify(users));
-        loadList('nguoidung-list', 'nguoidung');
-
-        // Quản lý vé số người dùng (từ check-lottery.html)
-        loadList('veso-list', 'lotteryHistory');
-    </script>
+    <script src="main.js"></script>
 
 </body>
 </html>

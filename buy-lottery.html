@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xổ Số Kiến Thiết - Lịch Mở Thưởng</title>
+    <title>Xổ Số Kiến Thiết - Kết Quả Theo Ngày/Tỉnh</title>
+    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
     <link rel="stylesheet" href="style.css">
+    <!-- Thêm jsPDF để xuất PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
-    <!-- Header -->
+    <!-- Header (tương tự index.html) -->
     <header >
         <div class="top-bar">
             <div class="help-support">
@@ -48,76 +51,72 @@
                     <li><a href="guide.html">Hướng Dẫn</a></li>
                     <li><a href="contact.html">Liên Hệ</a></li>
                 </ul>
-            </div>
+            </nav>
         </div>
     </header>
 
-    <!-- Trang lịch mở thưởng chính -->
-    <section class="schedule">
-        <h2>Lịch Mở Thưởng Xổ Số</h2>
-        <p>Chọn ngày để xem các tỉnh mở thưởng hoặc xem lịch mặc định trong tuần.</p>
-        <form id="schedule-form">
-            <label for="ngay">Chọn ngày:</label>
-            <input type="date" id="ngay" required>
-            <button type="submit">Xem Lịch</button>
-        </form>
-        
-        <div id="schedule-result" style="margin-top: 20px;">
-            <!-- Kết quả lịch sẽ hiển thị ở đây -->
-            <h3>Lịch Mở Thưởng Theo Ngày</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Ngày</th>
-                        <th>Miền</th>
-                        <th>Tỉnh</th>
-                        <th>Xem Kết Quả</th>
-                    </tr>
-                </thead>
-                <tbody id="schedule-table">
-                    <!-- Dữ liệu mẫu -->
-                    <tr>
-                        <td>24/09/2025</td>
-                        <td>Miền Nam</td>
-                        <td>TP. Hồ Chí Minh, Đồng Nai</td>
-                        <td><a href="results.html?ngay=2025-09-24&tinh=tphcm">Xem</a></td>
-                    </tr>
-                    <tr>
-                        <td>25/09/2025</td>
-                        <td>Miền Nam</td>
-                        <td>An Giang, Bình Thuận</td>
-                        <td><a href="results.html?ngay=2025-09-25&tinh=angiang">Xem</a></td>
-                    </tr>
-                    <!-- Thêm dữ liệu khác -->
-                </tbody>
-            </table>
-        </div>
+   <!-- Trang mua vé số -->
+<section class="buy-lottery">
+    <h2>Mua Vé Số Trực Tuyến</h2>
+    <p>Chọn vé số may mắn của bạn - Thanh toán nhanh chóng - An toàn</p>
 
-        <div class="weekly-schedule" style="margin-top: 40px;">
-            <h3>Lịch Mở Thưởng Theo Tuần</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Thứ</th>
-                        <th>Miền Nam</th>
-                        <th>Miền Trung</th>
-                        <th>Miền Bắc</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Thứ Hai</td>
-                        <td>TP. HCM, Đồng Tháp</td>
-                        <td>Phú Yên, Huế</td>
-                        <td>Hà Nội</td>
-                    </tr>
-                    <!-- Thêm các ngày khác -->
-                </tbody>
-            </table>
-        </div>
-    </section>
+    <!-- Tabs Miền -->
+    <div class="tabs-mien">
+        <button class="tab-mien active" data-mien="nam">Miền Nam</button>
+        <button class="tab-mien" data-mien="trung">Miền Trung</button>
+        <button class="tab-mien" data-mien="bac">Miền Bắc</button>
+    </div>
 
-    <!-- Footer  -->
+    <!-- Bộ lọc -->
+    <div class="filter-section">
+        <h3>Bộ Lọc Tìm Kiếm</h3>
+        <div class="filter-row">
+            <div>
+                <label for="filter-date">Ngày quay:</label>
+                <input type="date" id="filter-date">
+            </div>
+            <div>
+                <label for="filter-province">Đài quay:</label>
+                <select id="filter-province">
+                    <option value="">Tất cả</option>
+                </select>
+            </div>
+            <div>
+                <label for="filter-number">Số yêu thích:</label>
+                <input type="text" id="filter-number" placeholder="VD: 68, 888" maxlength="6">
+            </div>
+            <div style="display: flex; align-items: flex-end;">
+                <button onclick="applyFilter()" class="btn">Lọc</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Danh sách vé -->
+    <div id="ticket-list" class="ticket-grid">
+        <!-- Vé sẽ được tạo động bằng JS -->
+    </div>
+</section>
+
+<!-- Giỏ hàng nổi -->
+<div class="cart-float" onclick="toggleCart()">
+    🛒
+    <span class="cart-badge" id="cart-count">0</span>
+</div>
+
+<!-- Modal giỏ hàng -->
+<div class="cart-modal" id="cart-modal">
+    <div class="cart-content">
+        <h2>Giỏ Hàng Của Bạn</h2>
+        <div id="cart-items"></div>
+        <div class="cart-total">
+            Tổng tiền: <span id="cart-total">0</span> VNĐ
+        </div>
+        <button class="btn" onclick="checkout()" style="width: 100%; margin-bottom: 10px;">Thanh Toán</button>
+        <button class="btn btn-secondary" onclick="toggleCart()" style="width: 100%;">Đóng</button>
+    </div>
+</div>
+
+    <!-- Footer (tương tự index.html) -->
     <footer>
         <div class="footer-content">
             <div class="address">
@@ -149,5 +148,6 @@
     </footer>
 
      <script src="main.js"></script>
+
 </body>
 </html>

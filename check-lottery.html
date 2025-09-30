@@ -42,7 +42,7 @@
           <li><a href="index.html">Trang Chủ</a></li>
           <li><a href="check-lottery.html" class="active">Tra Cứu Vé Số</a></li>
           <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
-          <li><a href="results.html">Kết Quả</a></li>
+          <li><a href="buy-lottery.html">Mua Số</a></li>
           <li><a href="news.html">Tin Tức</a></li>
           <li><a href="about.html">Giới Thiệu</a></li>
           <li><a href="guide.html">Hướng Dẫn</a></li>
@@ -127,45 +127,7 @@
     <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
   </footer>
 
-  <!-- JS -->
-  <script>
-    const form = document.getElementById('check-lottery-form');
-    const lotteryContainer = document.getElementById('lottery-result');
-    const lotteryBody = document.getElementById('lottery-body');
-
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const mien = document.getElementById('mien').value;
-      const tinh = document.getElementById('tinh').value;
-      const ngay = document.getElementById('ngay').value;
-
-      // Dữ liệu giả lập
-      const ketQuaMau = {
-        dacbiet: "123456",
-        nhat: "654321",
-        nhi: ["112233", "445566"],
-        ba: ["778899", "990011"],
-        tu: ["12345", "67890", "11122", "33344", "55566", "77788", "99900"],
-        nam: ["22334", "55667", "88990"],
-        sau: ["1122", "3344", "5566"],
-        bay: ["778", "990", "223"],
-        tam: "45"
-      };
-
-      lotteryBody.innerHTML = `
-        <tr><td>Đặc Biệt</td><td class="highlight">${ketQuaMau.dacbiet}</td></tr>
-        <tr><td>Giải Nhất</td><td>${ketQuaMau.nhat}</td></tr>
-        <tr><td>Giải Nhì</td><td>${ketQuaMau.nhi.join(" - ")}</td></tr>
-        <tr><td>Giải Ba</td><td>${ketQuaMau.ba.join(" - ")}</td></tr>
-        <tr><td>Giải Tư</td><td>${ketQuaMau.tu.join(" - ")}</td></tr>
-        <tr><td>Giải Năm</td><td>${ketQuaMau.nam.join(" - ")}</td></tr>
-        <tr><td>Giải Sáu</td><td>${ketQuaMau.sau.join(" - ")}</td></tr>
-        <tr><td>Giải Bảy</td><td>${ketQuaMau.bay.join(" - ")}</td></tr>
-        <tr><td>Giải Tám</td><td>${ketQuaMau.tam}</td></tr>
-      `;
-      lotteryContainer.style.display = 'block';
-    });
-  </script>
+   <script src="main.js"></script>
 
 </body>
 </html>

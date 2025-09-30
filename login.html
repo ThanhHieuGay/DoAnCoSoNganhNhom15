@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xổ Số Kiến Thiết - Đăng Nhập/Đăng Ký</title>
-    <!-- Thêm link CSS/JS nếu cần từ template gốc -->
+   
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Header (tương tự index.html) -->
+    <!-- Header  -->
     <header>
         <div class="top-bar">
             <div class="help-support">
@@ -43,7 +43,7 @@
                     <li><a href="index.html">Trang Chủ</a></li>
                     <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
                     <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
-                    <li><a href="results.html">Kết Quả</a></li>
+                     <li><a href="buy-lottery.html">Mua Số</a></li>
                     <li><a href="news.html">Tin Tức</a></li>
                     <li><a href="about.html">Giới Thiệu</a></li>
                     <li><a href="guide.html">Hướng Dẫn</a></li>
@@ -98,7 +98,7 @@
         </div>
     </section>
 
-    <!-- Footer (tương tự index.html) -->
+    <!-- Footer  -->
     <footer>
         <div class="footer-content">
             <div class="address">
@@ -128,57 +128,6 @@
         </div>
         <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
     </footer>
-
-    <!-- JS để xử lý tab và form -->
-    <script>
-        const tabs = document.querySelectorAll('.tab');
-        const forms = document.querySelectorAll('.auth-form');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
-                forms.forEach(f => f.classList.remove('active'));
-                tab.classList.add('active');
-                document.getElementById(`${tab.dataset.tab}-form`).classList.add('active');
-            });
-        });
-
-        // Xử lý đăng nhập
-        document.getElementById('login').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-
-            // Simulate xác thực (thay bằng API backend)
-            if (email === 'user@xosokienthiet.vn' && password === 'password123') {
-                alert('Đăng nhập thành công! Chuyển hướng đến trang cá nhân...');
-                // Trong thực tế: lưu session và chuyển hướng
-                localStorage.setItem('user', email);
-                window.location.href = 'index.html';
-            } else {
-                alert('Email hoặc mật khẩu không đúng.');
-            }
-        });
-
-        // Xử lý đăng ký
-        document.getElementById('register').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const hoTen = document.getElementById('register-ho-ten').value;
-            const email = document.getElementById('register-email').value;
-            const dienThoai = document.getElementById('register-dien-thoai').value;
-            const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('register-confirm-password').value;
-
-            if (password !== confirmPassword) {
-                alert('Mật khẩu xác nhận không khớp.');
-                return;
-            }
-
-            // Simulate gửi dữ liệu (thay bằng API backend)
-            alert(`Đăng ký thành công cho ${hoTen}! Email: ${email}, SĐT: ${dienThoai}`);
-            document.getElementById('register').reset();
-        });
-    </script>
-
+ <script src="main.js"></script>
 </body>
 </html>

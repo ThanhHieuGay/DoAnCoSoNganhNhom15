@@ -43,7 +43,7 @@
                     <li><a href="index.html">Trang Chủ</a></li>
                     <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
                     <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
-                    <li><a href="results.html">Kết Quả</a></li>
+                    <li><a href="buy-lottery.html">Mua Số</a></li>
                     <li><a href="news.html">Tin Tức</a></li>
                     <li><a href="about.html">Giới Thiệu</a></li>
                     <li><a href="guide.html">Hướng Dẫn</a></li>
@@ -135,22 +135,7 @@
         <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
     </footer>
 
-    <!-- JS để xử lý form liên hệ -->
-    <script>
-        const form = document.getElementById('contact-form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const hoTen = document.getElementById('ho-ten').value;
-            const email = document.getElementById('email').value;
-            const dienThoai = document.getElementById('dien-thoai').value;
-            const tinhThanh = document.getElementById('tinh-thanh').value;
-            const noiDung = document.getElementById('noi-dung').value;
-
-            // Simulate gửi (thay bằng fetch API đến backend thực tế)
-            alert(`Cảm ơn ${hoTen}! Chúng tôi đã nhận thông tin từ ${tinhThanh}. Sẽ liên hệ qua ${email} hoặc ${dienThoai}. Nội dung: ${noiDung}`);
-            form.reset();
-        });
-    </script>
+    <script src="main.js"></script>
 
 </body>
 </html>
