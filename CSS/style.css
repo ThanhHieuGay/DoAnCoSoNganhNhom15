@@ -805,34 +805,30 @@ iframe {
 .dashboard a:hover {
     background: #b71c1c;
 }
-/* Header mặc định */
-#main-header {
+/*  */
+header {
     position: sticky;
     top: 0;
     z-index: 1000;
+    background: var(--primary-red);
+    box-shadow: var(--shadow);
 }
-/* Thu nhỏ tab */
-/* top-bar có chiều cao và hiệu ứng */
+
 .top-bar {
-    height: auto;
-    opacity: 1;
-    overflow: visible;
     transition: all 0.3s ease;
-    padding: 8px 20px;
+    position: relative;
 }
 
 #main-header.shrink .top-bar {
-    padding: 2px 20px;
-    opacity: 0.8;
-    font-size: 12px;
+    position: absolute;
+    top: -50px; /* Dịch lên trên ngoài màn hình */
+    width: 100%;
+    opacity: 0;
+    pointer-events: none; /* Không click được khi ẩn */
 }
 
-#main-header.shrink .main-header {
-    padding: 5px 20px;   
-}
-
-#main-header.shrink .logo h1 {
-    font-size: 1.5em;    
+.main-header {
+    transition: all 0.3s ease;
 }
 
 /* Trang mua vé số */

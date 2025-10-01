@@ -123,7 +123,7 @@ if (document.getElementById('check-lottery-form')) {
 
 
 
-// RESULTS.HTML - Trang mua vé số
+// Buy_lottery.HTML - Trang mua vé số
 
 if (document.getElementById('ticket-list')) {
     const ticketData = {
@@ -367,32 +367,106 @@ if (document.getElementById('schedule-form')) {
 // NEWS.HTML - Tin tức
 
 if (document.getElementById('news-list')) {
-    const tabs = document.querySelectorAll('.tabs .tab');
-    const newsItems = document.querySelectorAll('#news-list article');
+    // Dữ liệu tin tức đầy đủ
+    const allNews = [
+        // Trang 1
+        { id: 1, type: 'new hot', label: 'new', title: 'Người trúng Jackpot 92 tỷ đã nhận thưởng', content: 'Khách hàng may mắn ở Hà Nội đã chính thức lĩnh thưởng Vietlott.', date: '2025-10-01' },
+        { id: 2, type: 'hot popular', label: 'hot', title: 'Thống kê những con số thường xuất hiện trong tháng 9', content: 'Tổng hợp từ 30 kỳ quay gần đây.', date: '2025-09-30' },
+        { id: 3, type: 'new', label: 'new', title: 'Miền Nam khai trương thêm 2 đại lý mới', content: 'Người dân có thêm lựa chọn mua vé số.', date: '2025-09-29' },
+        
+        // Trang 2
+        { id: 4, type: 'popular', label: 'popular', title: 'Hướng dẫn cách chọn số may mắn theo phong thủy', content: 'Các chuyên gia chia sẻ bí quyết chọn số dựa trên ngày sinh và mệnh.', date: '2025-09-28' },
+        { id: 5, type: 'hot', label: 'hot', title: 'Xổ số Miền Bắc có thêm giải Jackpot 2', content: 'Giải thưởng phụ lên đến 10 tỷ đồng mỗi kỳ.', date: '2025-09-27' },
+        { id: 6, type: 'new popular', label: 'popular', title: 'Cặp vợ chồng trúng 45 tỷ từ vé số cào', content: 'Hai vợ chồng ở Đồng Nai mua vé thử may mắn và trúng giải lớn.', date: '2025-09-26' },
+        
+        // Trang 3
+        { id: 7, type: 'new', label: 'new', title: 'Ứng dụng mobile mua vé số chính thức ra mắt', content: 'Giờ đây bạn có thể mua vé số trực tuyến dễ dàng hơn.', date: '2025-09-25' },
+        { id: 8, type: 'hot popular', label: 'hot', title: 'Top 10 con số được mua nhiều nhất tuần qua', content: 'Số 88, 68, 86 dẫn đầu danh sách các con số hot.', date: '2025-09-24' },
+        { id: 9, type: 'popular', label: 'popular', title: 'Chương trình khuyến mãi tháng 10', content: 'Mua 5 vé tặng 1 vé, áp dụng từ ngày 1-15/10.', date: '2025-09-23' }
+    ];
 
+    const itemsPerPage = 3;
+    let currentPage = 1;
+    let currentFilter = 'all';
+
+    // Render tin tức theo trang và filter
+    function renderNews() {
+        const newsContainer = document.getElementById('news-list');
+        
+        // Lọc tin tức theo loại
+        let filteredNews = allNews;
+        if (currentFilter !== 'all') {
+            filteredNews = allNews.filter(news => news.type.includes(currentFilter));
+        }
+
+        // Tính toán phân trang
+        const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const newsToShow = filteredNews.slice(startIndex, endIndex);
+
+        // Hiển thị tin tức
+        newsContainer.innerHTML = newsToShow.map(news => `
+            <article data-type="${news.type}">
+                <span class="label ${news.label}">${news.label === 'new' ? 'New' : news.label === 'hot' ? 'Hot' : 'Popular'}</span>
+                <h3>${news.title}</h3>
+                <p>${news.content}</p>
+                <small style="color: #999; display: block; margin: 10px 0;">Ngày: ${news.date}</small>
+                <a href="#detail${news.id}">Xem thêm</a>
+            </article>
+        `).join('');
+
+        // Cập nhật pagination
+        updatePagination(totalPages);
+    }
+
+    // Cập nhật nút phân trang
+    function updatePagination(totalPages) {
+        const paginationDiv = document.querySelector('.pagination');
+        let paginationHTML = `<button onclick="changePage('prev')" ${currentPage === 1 ? 'disabled' : ''}>«</button>`;
+        
+        for (let i = 1; i <= totalPages; i++) {
+            paginationHTML += `<button onclick="changePage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+        }
+        
+        paginationHTML += `<button onclick="changePage('next')" ${currentPage === totalPages ? 'disabled' : ''}>»</button>`;
+        paginationDiv.innerHTML = paginationHTML;
+    }
+
+    // Thay đổi trang
+    window.changePage = function(page) {
+        let filteredNews = allNews;
+        if (currentFilter !== 'all') {
+            filteredNews = allNews.filter(news => news.type.includes(currentFilter));
+        }
+        const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
+
+        if (page === 'prev' && currentPage > 1) {
+            currentPage--;
+        } else if (page === 'next' && currentPage < totalPages) {
+            currentPage++;
+        } else if (typeof page === 'number') {
+            currentPage = page;
+        }
+
+        renderNews();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Xử lý tab filter
+    const tabs = document.querySelectorAll('.tabs .tab');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
-            const type = tab.dataset.type;
-
-            newsItems.forEach(item => {
-                if (type === 'all' || item.dataset.type.includes(type)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+            currentFilter = tab.dataset.type;
+            currentPage = 1; // Reset về trang 1 khi đổi filter
+            renderNews();
         });
     });
 
-    // Phân trang
-    const paginationBtns = document.querySelectorAll('.pagination button');
-    paginationBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            alert('Đang tải trang tiếp theo...');
-        });
-    });
+    // Khởi tạo
+    renderNews();
 }
 
 
@@ -518,4 +592,14 @@ document.addEventListener('DOMContentLoaded', () => {
             link.classList.remove('active');
         }
     });
+});
+// Thu nhỏ header khi cuộn
+window.addEventListener('scroll', function() {
+    const header = document.getElementById('main-header');
+    
+    if (window.scrollY > 100) {
+        header.classList.add('shrink');
+    } else {
+        header.classList.remove('shrink');
+    }
 });
