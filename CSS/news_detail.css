@@ -1,0 +1,473 @@
+/* ========== BREADCRUMB ========== */
+.breadcrumb-container {
+    max-width: 1200px;
+    margin: 30px auto 0;
+    padding: 0 20px;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.breadcrumb a {
+    color: #C8102E;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: #a00d25;
+    text-decoration: underline;
+}
+
+.breadcrumb span {
+    color: #999;
+}
+
+/* ========== LAYOUT CHÍNH ========== */
+.news-detail-container {
+    max-width: 1200px;
+    margin: 30px auto 60px;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+}
+
+/* ========== NỘI DUNG BÀI VIẾT ========== */
+.news-detail-content {
+    background: white;
+    border-radius: 15px;
+    padding: 50px;
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+}
+
+.loading {
+    text-align: center;
+    padding: 100px 20px;
+    color: #999;
+}
+
+/* Badge */
+.detail-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff6b6b, #C8102E);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 25px;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Tiêu đề */
+.detail-title {
+    font-size: 36px;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    font-weight: 700;
+}
+
+/* Meta info */
+.detail-meta {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-top: 2px solid #f0f0f0;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    font-size: 14px;
+}
+
+.meta-item span {
+    font-weight: 600;
+}
+
+/* Hình ảnh chính */
+.detail-featured-image {
+    width: 100%;
+    height: 450px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-radius: 15px;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.detail-featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-featured-image:empty::before {
+    content: '📷';
+    font-size: 80px;
+    color: #ccc;
+    position: absolute;
+}
+
+/* Nội dung */
+.detail-summary {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 35px;
+    padding: 25px;
+    background: #f8f9fa;
+    border-left: 4px solid #C8102E;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+.detail-body {
+    font-size: 16px;
+    color: #444;
+    line-height: 1.9;
+    margin-bottom: 40px;
+}
+
+.detail-body p {
+    margin-bottom: 20px;
+}
+
+.detail-body h2 {
+    font-size: 26px;
+    color: #333;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #C8102E;
+    font-weight: 600;
+}
+
+.detail-body h3 {
+    font-size: 22px;
+    color: #333;
+    margin: 30px 0 15px;
+    font-weight: 600;
+}
+
+.detail-body ul, .detail-body ol {
+    margin: 20px 0 20px 30px;
+    line-height: 1.9;
+}
+
+.detail-body li {
+    margin-bottom: 10px;
+}
+
+.detail-body blockquote {
+    border-left: 4px solid #C8102E;
+    padding: 20px 25px;
+    margin: 30px 0;
+    background: #f8f9fa;
+    font-style: italic;
+    color: #555;
+    border-radius: 8px;
+}
+
+.detail-body img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 25px 0;
+}
+
+/* Tags */
+.detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 2px solid #f0f0f0;
+}
+
+.tag {
+    padding: 8px 18px;
+    background: #f0f0f0;
+    color: #666;
+    border-radius: 20px;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.tag:hover {
+    background: #C8102E;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Social Share */
+.detail-share {
+    margin-top: 40px;
+    padding: 30px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.detail-share h4 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.share-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.share-btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.share-btn.facebook {
+    background: #1877f2;
+    color: white;
+}
+
+.share-btn.twitter {
+    background: #1da1f2;
+    color: white;
+}
+
+.share-btn.copy {
+    background: #666;
+    color: white;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* ========== SIDEBAR ========== */
+.news-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.related-news, .trending-news {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f0f0f0;
+}
+
+.related-news h3, .trending-news h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #C8102E;
+    font-weight: 600;
+}
+
+/* Item tin liên quan */
+.sidebar-news-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.sidebar-news-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.sidebar-news-item:hover {
+    background: #f8f9fa;
+    padding-left: 10px;
+    margin-left: -10px;
+    border-radius: 8px;
+}
+
+.sidebar-news-thumb {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.sidebar-news-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sidebar-news-thumb:empty::before {
+    content: '📷';
+    font-size: 24px;
+    color: #ccc;
+}
+
+.sidebar-news-info h4 {
+    font-size: 15px;
+    color: #333;
+    line-height: 1.4;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.sidebar-news-info h4 a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.sidebar-news-info h4 a:hover {
+    color: #C8102E;
+}
+
+.sidebar-news-date {
+    font-size: 12px;
+    color: #999;
+}
+
+/* Back to list button */
+.back-to-list {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 25px;
+    background: white;
+    color: #C8102E;
+    border: 2px solid #C8102E;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 30px;
+}
+
+.back-to-list:hover {
+    background: #C8102E;
+    color: white;
+    transform: translateX(-5px);
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 1024px) {
+    .news-detail-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .news-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 13px;
+    }
+
+    .news-detail-content {
+        padding: 30px 25px;
+    }
+
+    .detail-title {
+        font-size: 28px;
+    }
+
+    .detail-featured-image {
+        height: 250px;
+    }
+
+    .detail-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .detail-summary {
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .detail-body {
+        font-size: 15px;
+    }
+
+    .detail-body h2 {
+        font-size: 22px;
+    }
+
+    .detail-body h3 {
+        font-size: 19px;
+    }
+
+    .news-sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .related-news, .trending-news {
+        padding: 25px 20px;
+    }
+
+    .share-buttons {
+        flex-direction: column;
+    }
+
+    .share-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

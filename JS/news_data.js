@@ -6,7 +6,7 @@ const newsData = [
         title: 'Người trúng Jackpot 92 tỷ đã nhận thưởng', 
         content: 'Khách hàng may mắn ở Hà Nội đã chính thức lĩnh thưởng Vietlott.', 
         date: '2025-10-08',
-        image: '' // Để trống cho bạn thêm sau
+        image: 'Images/images.jpg'
     },
     { 
         id: 2, 
@@ -14,7 +14,7 @@ const newsData = [
         title: 'Thống kê những con số thường xuất hiện trong tháng 9', 
         content: 'Tổng hợp từ 30 kỳ quay gần đây, số 88, 68, 86 dẫn đầu.', 
         date: '2025-10-07',
-        image: '' // Để trống cho bạn thêm sau
+        image: 'Images/images.jpg'
     },
     { 
         id: 3, 
@@ -22,7 +22,7 @@ const newsData = [
         title: 'Miền Nam khai trương thêm 2 đại lý mới', 
         content: 'Người dân có thêm lựa chọn mua vé số tại TP.HCM và Đồng Nai.', 
         date: '2025-10-06',
-        image: '' // Để trống cho bạn thêm sau
+        image: 'Images/images.jpg'
     },
     { 
         id: 4, 
@@ -30,7 +30,7 @@ const newsData = [
         title: 'Cặp vợ chồng trúng 45 tỷ từ vé số cào', 
         content: 'Hai vợ chồng ở Đồng Nai mua vé thử may mắn và trúng giải lớn.', 
         date: '2025-10-05',
-        image: '' // Để trống cho bạn thêm sau
+        image: 'Images/images.jpg'
     },
     { 
         id: 5, 
@@ -38,7 +38,7 @@ const newsData = [
         title: 'Ứng dụng mobile mua vé số chính thức ra mắt', 
         content: 'Giờ đây bạn có thể mua vé số trực tuyến dễ dàng hơn.', 
         date: '2025-10-04',
-        image: '' // Để trống cho bạn thêm sau
+        image: 'Images/images.jpg'
     },
     { 
         id: 6, 
@@ -46,7 +46,7 @@ const newsData = [
         title: 'Chương trình khuyến mãi tháng 10', 
         content: 'Mua 5 vé tặng 1 vé, áp dụng từ ngày 1-15/10.', 
         date: '2025-10-03',
-        image: '' // Để trống cho bạn thêm sau
+        image: 'Images/images.jpg'
     },
     { 
         id: 7, 
@@ -54,7 +54,7 @@ const newsData = [
         title: 'Hướng dẫn cách chọn số may mắn theo phong thủy', 
         content: 'Các chuyên gia chia sẻ bí quyết chọn số dựa trên ngày sinh và mệnh.', 
         date: '2025-10-02',
-        image: ''
+        image: 'Images/images.jpg'
     },
     { 
         id: 8, 
@@ -62,7 +62,7 @@ const newsData = [
         title: 'Top 10 con số được mua nhiều nhất tuần qua', 
         content: 'Số 88, 68, 86 dẫn đầu danh sách các con số hot.', 
         date: '2025-10-01',
-        image: ''
+        image: 'Images/images.jpg'
     },
     { 
         id: 9, 
@@ -70,7 +70,7 @@ const newsData = [
         title: 'Xổ số Miền Bắc có thêm giải Jackpot 2', 
         content: 'Giải thưởng phụ lên đến 10 tỷ đồng mỗi kỳ.', 
         date: '2025-09-30',
-        image: ''
+        image: 'Images/images.jpg'
     }
 ];
 
@@ -79,10 +79,8 @@ function renderHotNews(containerId = 'hot-news-section', limit = 3) {
     const container = document.getElementById(containerId);
     if (!container) return;
 
-    // Lọc tin nổi bật (hot)
     const hotNews = newsData.filter(news => news.type === 'hot').slice(0, limit);
 
-    // Tạo HTML
     const newsHTML = `
         <div class="hot-news-header">
             <h2>🔥 Tin Tức Nổi Bật</h2>
@@ -99,7 +97,7 @@ function renderHotNews(containerId = 'hot-news-section', limit = 3) {
                     <p>${news.content}</p>
                     <div class="news-footer">
                         <span class="news-date">📅 ${formatDate(news.date)}</span>
-                        <a href="news.html#detail${news.id}" class="read-more">Đọc thêm</a>
+                        <a href="news-detail.html#detail${news.id}" class="read-more">Đọc thêm</a>
                     </div>
                 </div>
             `).join('')}
@@ -118,21 +116,17 @@ function renderNewsPage() {
     let currentPage = 1;
     let currentFilter = 'all';
 
-    // Render tin tức theo trang và filter
     function renderNews() {
-        // Lọc tin tức theo loại
         let filteredNews = newsData;
         if (currentFilter !== 'all') {
             filteredNews = newsData.filter(news => news.type === currentFilter);
         }
 
-        // Tính toán phân trang
         const totalPages = Math.ceil(filteredNews.length / itemsPerPage);
         const startIndex = (currentPage - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
         const newsToShow = filteredNews.slice(startIndex, endIndex);
 
-        // Hiển thị tin tức
         if (newsToShow.length === 0) {
             newsList.innerHTML = '<p class="empty-cart">Không tìm thấy tin tức nào</p>';
         } else {
@@ -145,16 +139,14 @@ function renderNewsPage() {
                     <h3>${news.title}</h3>
                     <p>${news.content}</p>
                     <small>📅 ${formatDate(news.date)}</small>
-                    <a href="#detail${news.id}">Xem thêm →</a>
+                    <a href="news-detail.html#detail${news.id}">Xem thêm →</a>
                 </article>
             `).join('');
         }
 
-        // Cập nhật pagination
         updatePagination(totalPages);
     }
 
-    // Cập nhật nút phân trang
     function updatePagination(totalPages) {
         const paginationDiv = document.querySelector('.pagination');
         let paginationHTML = `<button onclick="changePage('prev')" ${currentPage === 1 ? 'disabled' : ''}>«</button>`;
@@ -167,7 +159,6 @@ function renderNewsPage() {
         paginationDiv.innerHTML = paginationHTML;
     }
 
-    // Thay đổi trang
     window.changePage = function(page) {
         let filteredNews = newsData;
         if (currentFilter !== 'all') {
@@ -187,23 +178,20 @@ function renderNewsPage() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Xử lý tab filter
     const tabs = document.querySelectorAll('.tabs .tab');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
             tabs.forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             currentFilter = tab.dataset.type;
-            currentPage = 1; // Reset về trang 1 khi đổi filter
+            currentPage = 1;
             renderNews();
         });
     });
 
-    // Khởi tạo
     renderNews();
 }
 
-// Format ngày
 function formatDate(dateStr) {
     const date = new Date(dateStr);
     return date.toLocaleDateString('vi-VN', { 
@@ -213,8 +201,7 @@ function formatDate(dateStr) {
     });
 }
 
-// Tự động render khi load trang
 document.addEventListener('DOMContentLoaded', () => {
-    renderHotNews(); // Cho trang index
-    renderNewsPage(); // Cho trang news
+    renderHotNews();
+    renderNewsPage();
 });
