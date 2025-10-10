@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xổ Số Kiến Thiết - Trang Chủ</title>
-    <link rel="stylesheet" href="CSS\style.css">
+    <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/numberstyle.css">
+    <link rel="stylesheet" href="CSS/homepage.css">
+    <link rel="stylesheet" href="CSS/hot_news.css">
 </head>
 <body>
-
-    <!-- Header -->
+   <!-- Header  -->
     <header id="main-header">
         <div class="top-bar">
             <div class="help-support">
@@ -20,8 +22,12 @@
                 Gọi chúng tôi: (+84) 1234 567890
             </div>
             <div class="currency-language">
-                <select><option>VNĐ</option></select>
-                <select><option>Tiếng Việt</option></select>
+                <select>
+                    <option>VNĐ</option>
+                </select>
+                <select>
+                    <option>Tiếng Việt</option>
+                </select>
                 <div class="dashboard">
                     <a href="login.html">Đăng nhập</a>
                     <a href="register.html">Đăng ký</a>
@@ -35,7 +41,7 @@
             </div>
             <nav>
                 <ul>
-                    <li><a href="index.html" class="active">Trang Chủ</a></li>
+                    <li><a href="index.html">Trang Chủ</a></li>
                     <li><a href="check-lottery.html">Tra Cứu Vé Số</a></li>
                     <li><a href="schedule.html">Lịch Mở Thưởng</a></li>
                     <li><a href="buy-lottery.html">Mua Số</a></li>
@@ -48,67 +54,266 @@
         </div>
     </header>
 
-    <!-- Bảng kết quả xổ số hiển thị trước -->
-    <section class="lottery-today">
-    <h2>Kết Quả Xổ Số Miền Nam - Ngày 25/09/2025</h2>
-    <div class="lottery-wrapper">
-        <table class="lottery-table">
-            <thead>
-                <tr><th>Giải</th><th>Kết Quả</th></tr>
-            </thead>
-            <tbody>
-                <tr><td>Đặc Biệt</td><td class="highlight">123456</td></tr>
-                <tr><td>Giải Nhất</td><td>654321</td></tr>
-                <tr><td>Giải Nhì</td><td>112233 - 445566</td></tr>
-                <tr><td>Giải Ba</td><td>778899 - 990011</td></tr>
-                <tr><td>Giải Tư</td><td>12345 - 67890 - 11122 - 33344 - 55566 - 77788 - 99900</td></tr>
-                <tr><td>Giải Năm</td><td>22334 - 55667 - 88990</td></tr>
-                <tr><td>Giải Sáu</td><td>1122 - 3344 - 5566</td></tr>
-                <tr><td>Giải Bảy</td><td>778 - 990 - 223</td></tr>
-                <tr><td>Giải Tám</td><td>45</td></tr>
-            </tbody>
-        </table>
-    </div>
-    </section>
+     <!-- Bộ Lọc Kết Quả -->
+    <section class="lottery-filter">
+        <div class="region-tabs">
+            <button class="region-tab active" data-region="nam" onclick="selectRegion('nam')">
+                MIỀN NAM
+            </button>
+            <button class="region-tab" data-region="trung" onclick="selectRegion('trung')">
+                MIỀN TRUNG
+            </button>
+            <button class="region-tab" data-region="bac" onclick="selectRegion('bac')">
+                MIỀN BẮC
+            </button>
+        </div>
 
-    <!-- Tool dò vé thủ công -->
-    <section class="check-lottery">
-    <h2>Dò Vé Số Của Bạn</h2>
-    <p>Nhập số vé của bạn để hệ thống kiểm tra tự động.</p>
+        <div class="date-selector">
+            <button class="date-nav-btn" onclick="changeDate(-1)">« Hôm qua</button>
+            <div class="current-date" id="current-date">
+            </div>
+            <button class="date-nav-btn" onclick="showDatePicker()">📅 Chọn ngày</button>
+        </div>
+    </section>
     
-    <div class="form-wrapper">
-        <form id="check-form">
-            <label for="so-ve">Số vé (6 chữ số):</label>
-            <input type="text" id="so-ve" maxlength="6" placeholder="Ví dụ: 123456" required>
-            
-            <label for="mien">Miền:</label>
-            <select id="mien">
-                <option value="nam">Miền Nam</option>
-                <option value="trung">Miền Trung</option>
-                <option value="bac">Miền Bắc</option>
-            </select>
-            
-            <label for="tinh">Tỉnh:</label>
-            <select id="tinh">
-                <option>TP. Hồ Chí Minh</option>
-                <option>Đồng Nai</option>
-            </select>
-            
-            <label for="ngay">Ngày xổ:</label>
-            <input type="date" id="ngay" required>
-            
-            <button type="submit">Dò Vé</button>
-        </form>
-        <div id="result" style="margin-top: 20px;"></div>
-    </div>
-    </section>
+    <!-- Khu Vực Hiển Thị Kết Quả Mặc Định LÀ miền nam-->
+<section class="lottery-status region" id="mien-nam">
+    <div class="status-card">
+        <h2 style="color: #555; font-weight: 600;">
+            Kết quả xổ số <span style="color: #C8102E;">Miền Nam</span> - 
+            <span id="current-date-2" style="color: #666; font-weight: 500;"></span>
+        </h2>
+        
+        <!-- Navigation Arrows -->
+        <div class="carousel-nav">
+            <button class="carousel-btn prev" onclick="changeProvince(-1)">‹</button>
+            <span class="province-indicator" id="province-indicator">1 / 3</span>
+            <button class="carousel-btn next" onclick="changeProvince(1)">›</button>
+        </div>
 
-    <!-- Footer -->
+        <div class="results-carousel">
+            <!-- Card 1: TP. HỒ CHÍ MINH -->
+            <div class="province-card active">
+                <div class="province-header">TP. HỒ CHÍ MINH</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">363636</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">654321</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>112233</span><span>445566</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>778899</span><span>990011</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>12345</span><span>67890</span><span>11122</span><span>33344</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>22334</span><span>55667</span><span>88990</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>1122</span><span>3344</span><span>5566</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>778</span><span>990</span><span>223</span></td></tr>
+                    <tr><td>Giải Tám</td> <td class="numbers"><span>45</span></td></tr>
+                </table>
+            </div>
+
+            <!-- Card 2: ĐỒNG NAI -->
+            <div class="province-card">
+                <div class="province-header">ĐỒNG NAI</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">363636</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">777777</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>556677</span><span>889900</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>334455</span><span>667788</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>54321</span><span>09876</span><span>22113</span><span>44335</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>33224</span><span>66557</span><span>99880</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>2211</span><span>4433</span><span>6655</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>887</span><span>009</span><span>332</span></td></tr>
+                    <tr><td>Giải Tám</td> <td class="numbers"><span>09</span></td></tr>
+                </table>
+            </div>
+
+            <!-- Card 3: CẦN THƠ -->
+            <div class="province-card">
+                <div class="province-header">CẦN THƠ</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">363636</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">686868</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>223344</span><span>556677</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>889900</span><span>112233</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>98765</span><span>43210</span><span>55667</span><span>88990</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>11223</span><span>44556</span><span>77889</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>9988</span><span>7766</span><span>5544</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>332</span><span>110</span><span>998</span></td></tr>
+                    <tr><td>Giải Tám</td> <td class="numbers"><span>85</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Miền Trung -->
+<section class="lottery-status region" id="mien-trung" style="display: none;">
+    <div class="status-card">
+        <h2 style="color: #555; font-weight: 600;">
+            Kết quả xổ số <span style="color: #C8102E;">Miền Trung</span> - 
+            <span id="current-date-3" style="color: #666; font-weight: 500;"></span>
+        </h2>
+
+      <div class="carousel-nav">
+        <button class="carousel-btn prev" onclick="changeProvince(-1)">‹</button>
+        <span class="province-indicator">1 / 2</span>
+        <button class="carousel-btn next" onclick="changeProvince(1)">›</button>
+      </div>
+
+
+        <div class="results-carousel">
+            <div class="province-card active">
+                <div class="province-header">ĐÀ NẴNG</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">123456</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">654321</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>112233</span><span>445566</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>778899</span><span>990011</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>12345</span><span>67890</span><span>11122</span><span>33344</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>22334</span><span>55667</span><span>88990</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>1122</span><span>3344</span><span>5566</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>778</span><span>990</span><span>223</span></td></tr>
+                    <tr><td>Giải Tám</td><td class="numbers"><span>45</span></td></tr>
+                </table>
+            </div>
+
+            <div class="province-card">
+                <div class="province-header">HUẾ</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">888888</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">777777</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>556677</span><span>889900</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>334455</span><span>667788</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>54321</span><span>09876</span><span>22113</span><span>44335</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>33224</span><span>66557</span><span>99880</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>2211</span><span>4433</span><span>6655</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>887</span><span>009</span><span>332</span></td></tr>
+                    <tr><td>Giải Tám</td><td class="numbers"><span>54</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Miền Bắc -->
+<section class="lottery-status region" id="mien-bac" style="display: none;">
+    <div class="status-card">
+        <h2 style="color: #555; font-weight: 600;">
+            Kết quả xổ số <span style="color: #C8102E;">Miền Bắc</span> - 
+            <span id="current-date-4" style="color: #666; font-weight: 500;"></span>
+        </h2>
+
+        <div class="carousel-nav">
+            <button class="carousel-btn prev" onclick="changeProvince(-1)">‹</button>
+            <span class="province-indicator">1 / 2</span>
+            <button class="carousel-btn next" onclick="changeProvince(1)">›</button>
+        </div>
+
+
+        <div class="results-carousel">
+            <div class="province-card active">
+                <div class="province-header">HÀ NỘI</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">246810</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">135791</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>223344</span><span>556677</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>889900</span><span>112233</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>98765</span><span>43210</span><span>55667</span><span>88990</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>11223</span><span>44556</span><span>77889</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>9988</span><span>7766</span><span>5544</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>332</span><span>110</span><span>998</span></td></tr>
+                    <tr><td>Giải Tám</td><td class="numbers"><span>86</span></td></tr>
+                </table>
+            </div>
+
+            <div class="province-card">
+                <div class="province-header">HẢI PHÒNG</div>
+                <table class="results-table">
+                    <tr><td>🏆 Đặc Biệt</td><td class="prize-special">999999</td></tr>
+                    <tr><td>🥇 Giải Nhất</td><td class="prize-first">888888</td></tr>
+                    <tr><td>🥈 Giải Nhì</td><td class="numbers"><span>111222</span><span>333444</span></td></tr>
+                    <tr><td>🥉 Giải Ba</td><td class="numbers"><span>555666</span><span>777888</span></td></tr>
+                    <tr><td>Giải Tư</td><td class="numbers"><span>99999</span><span>88888</span><span>77777</span><span>66666</span></td></tr>
+                    <tr><td>Giải Năm</td><td class="numbers"><span>55555</span><span>44444</span><span>33333</span></td></tr>
+                    <tr><td>Giải Sáu</td><td class="numbers"><span>2222</span><span>1111</span><span>0000</span></td></tr>
+                    <tr><td>Giải Bảy</td><td class="numbers"><span>99</span><span>88</span><span>77</span></td></tr>
+                    <tr><td>Giải Tám</td><td class="numbers"><span>55</span></td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+   
+
+    <!-- Quick Check Section - ĐÃ CẢI TIẾN -->
+    <section class="quick-check">
+        <h3>🎯 Tra Cứu Vé Số Nhanh</h3>
+        <p style="text-align: center; color: #666; margin-bottom: 20px;">
+            Nhập đầy đủ thông tin để kiểm tra kết quả chính xác
+        </p>
+        
+        <form class="check-form" id="check-form" onsubmit="checkTicket(event)">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Chọn Miền <span style="color: red;">*</span></label>
+                    <select id="check-mien" required>
+                        <option value="">-- Chọn miền --</option>
+                        <option value="nam">Miền Nam</option>
+                        <option value="trung">Miền Trung</option>
+                        <option value="bac">Miền Bắc</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Chọn Tỉnh/Thành <span style="color: red;">*</span></label>
+                    <select id="check-tinh" required>
+                        <option value="">-- Chọn tỉnh/thành --</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Ngày Mở Thưởng <span style="color: red;">*</span></label>
+                    <input type="date" id="check-date" required >
+                </div>
+                
+                <div class="form-group">
+                    <label>Mã Số Vé (6 chữ số) <span style="color: red;">*</span></label>
+                    <input type="text" 
+                           id="ticket-number" 
+                           class="number-input" 
+                           placeholder="123456" 
+                           maxlength="6" 
+                           pattern="[0-9]{6}"
+                           required>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn-check">
+                🔍 KIỂM TRA NGAY
+            </button>
+            
+            <div id="check-result" class="check-result" style="display: none;"></div>
+        </form>
+    </section>
+    <!-- Tin Tức Nổi Bật -->
+    <section class="hot-news-section" id="hot-news-section">
+    <!-- Nội dung sẽ được tự động render bởi JavaScript -->
+    </section>
+    <!-- Footer  -->
     <footer>
         <div class="footer-content">
-            <div class="address"><h4>Địa chỉ</h4><p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p></div>
-            <div class="mail"><h4>Email</h4><p>info@xosokienthiet.vn</p></div>
-            <div class="phone"><h4>Điện thoại</h4><p>(+84) 1234 567890</p></div>
+            <div class="address">
+                <h4>Địa chỉ</h4>
+                <p>123 Đường ABC, TP. Hồ Chí Minh, Việt Nam</p>
+            </div>
+            <div class="mail">
+                <h4>Email</h4>
+                <p>info@xosokienthiet.vn</p>
+            </div>
+            <div class="phone">
+                <h4>Điện thoại</h4>
+                <p>(+84) 1234 567890</p>
+            </div>
         </div>
         <div class="newsletter">
             <h4>Đăng ký nhận tin</h4>
@@ -124,8 +329,11 @@
         </div>
         <p>&copy; 2025 Xổ Số Kiến Thiết. All rights reserved.</p>
     </footer>
-
-    <script src="JS\main.js"></script>
-
+    <!-- JavaScript Files -->
+    <script src="JS/main.js"></script>
+    <script src="JS/homepage.js"></script>
+    <script src="JS/dayyear.js"></script>
+    <script src="JS/change_domain.js"></script>
+    <script src="JS/news_data.js"></script>
 </body>
 </html>

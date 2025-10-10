@@ -1,0 +1,286 @@
+/* ========== TRANG TIN TỨC ========== */
+.news-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 50px 20px;
+    background: linear-gradient(to bottom, #fafafa, #ffffff);
+}
+
+.news-section > h2 {
+    font-size: 32px;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.news-section > p {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+/* ========== TAB FILTER ========== */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.tabs .tab {
+    padding: 12px 30px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.tabs .tab:hover {
+    border-color: #C8102E;
+    color: #C8102E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(200, 16, 46, 0.15);
+}
+
+.tabs .tab.active {
+    background: linear-gradient(135deg, #C8102E, #a00d25);
+    border-color: #C8102E;
+    color: white;
+    box-shadow: 0 4px 15px rgba(200, 16, 46, 0.3);
+}
+
+/* ========== DANH SÁCH TIN TỨC ========== */
+.news-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.news-items article {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
+    border: 1px solid #f0f0f0;
+    min-height: 420px;
+    display: flex;
+    flex-direction: column;
+}
+
+.news-items article:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(200, 16, 46, 0.15);
+    border-color: #C8102E;
+}
+
+/* ========== HÌNH ẢNH TIN TỨC ========== */
+.news-image-placeholder {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.news-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-image-placeholder:empty::before {
+    content: '📷';
+    font-size: 48px;
+    color: #ccc;
+    position: absolute;
+}
+
+/* ========== LABEL (NEW/HOT/POPULAR) ========== */
+.label {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.label.new {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    animation: pulse 2s infinite;
+}
+
+.label.hot {
+    background: linear-gradient(135deg, #ff6b6b, #C8102E);
+    animation: pulse 2s infinite;
+}
+
+.label.popular {
+    background: linear-gradient(135deg, #2196F3, #1565C0);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ========== NỘI DUNG TIN ========== */
+.news-items article h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 15px 0;
+    line-height: 1.6;
+    min-height: 65px;
+    font-weight: 600;
+}
+
+.news-items article p {
+    color: #666;
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    min-height: 80px;
+    flex-grow: 1;
+}
+
+.news-items article small {
+    color: #999;
+    display: block;
+    margin: 10px 0;
+    font-size: 13px;
+}
+
+.news-items article a {
+    color: #C8102E;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    align-self: flex-start;
+    padding: 8px 20px;
+    border: 2px solid #C8102E;
+    border-radius: 25px;
+    margin-top: auto;
+}
+
+.news-items article a:hover {
+    background: #C8102E;
+    color: white;
+    transform: translateX(5px);
+}
+
+/* ========== PAGINATION ========== */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.pagination button {
+    padding: 10px 18px;
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+    min-width: 45px;
+}
+
+.pagination button:hover:not(:disabled) {
+    border-color: #C8102E;
+    color: #C8102E;
+    transform: translateY(-2px);
+}
+
+.pagination button.active {
+    background: linear-gradient(135deg, #C8102E, #a00d25);
+    border-color: #C8102E;
+    color: white;
+    box-shadow: 0 4px 10px rgba(200, 16, 46, 0.3);
+}
+
+.pagination button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ========== MESSAGE TRỐNG ========== */
+.empty-cart {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+    font-size: 18px;
+    grid-column: 1 / -1;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+    .news-section {
+        padding: 30px 15px;
+        margin: 40px auto;
+    }
+    
+    .news-section > h2 {
+        font-size: 26px;
+    }
+    
+    .news-items {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    
+    .news-items article {
+        padding: 25px 20px;
+        min-height: auto;
+    }
+    
+    .news-items article h3 {
+        font-size: 18px;
+        min-height: auto;
+    }
+    
+    .news-items article p {
+        font-size: 14px;
+        min-height: auto;
+    }
+    
+    .tabs {
+        gap: 10px;
+    }
+    
+    .tabs .tab {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}

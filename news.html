@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xổ Số Kiến Thiết - Tin Tức</title>
     <link rel="stylesheet" href="CSS\style.css">
+    <link rel="stylesheet" href="CSS/news_page.css">
 </head>
 <body>
 
@@ -52,49 +53,26 @@
         </div>
     </header>
 
-    <!-- Trang tin tức chính -->
-    <section class="news-section">
-        <h2>Tin Tức & Thông Báo Xổ Số Kiến Thiết</h2>
-        <p>Cập nhật các tin tức mới nhất về xổ số, trúng thưởng lớn, chương trình khuyến mãi và hoạt động xã hội.</p>
-        
-        <div class="tabs">
-            <button class="tab active" data-type="all">Tất cả</button>
-            <button class="tab" data-type="new">Mới nhất</button>
-            <button class="tab" data-type="hot">Nổi bật</button>
-            <button class="tab" data-type="popular">Phổ biến</button>
-        </div>
-        
-        <div id="news-list" class="news-items">
-            <!-- Dữ liệu mẫu -->
-            <article data-type="new hot">
-                <span class="label new">New</span>
-                <h3>Người trúng Jackpot 92 tỷ đã nhận thưởng</h3>
-                <p>Khách hàng may mắn ở Hà Nội đã chính thức lĩnh thưởng Vietlott.</p>
-                <a href="#detail1">Xem thêm</a>
-            </article>
-            <article data-type="hot popular">
-                <span class="label hot">Hot</span>
-                <h3>Thống kê những con số thường xuất hiện trong tháng 9</h3>
-                <p>Tổng hợp từ 30 kỳ quay gần đây.</p>
-                <a href="#detail2">Xem thêm</a>
-            </article>
-            <article data-type="new">
-                <span class="label new">New</span>
-                <h3>Miền Nam khai trương thêm 2 đại lý mới</h3>
-                <p>Người dân có thêm lựa chọn mua vé số.</p>
-                <a href="#detail3">Xem thêm</a>
-            </article>
-            <!-- Thêm bài viết khác -->
-        </div>
-        
-        <div class="pagination">
-            <button disabled>«</button>
-            <button class="active">1</button>
-            <button>2</button>
-            <button>3</button>
-            <button>»</button>
-        </div>
-    </section>
+   <!-- Trang tin tức chính -->
+<section class="news-section">
+    <h2>📰 Tin Tức & Thông Báo Xổ Số Kiến Thiết</h2>
+    <p>Cập nhật các tin tức mới nhất về xổ số, trúng thưởng lớn, chương trình khuyến mãi và hoạt động xã hội.</p>
+    
+    <div class="tabs">
+        <button class="tab active" data-type="all">Tất cả</button>
+        <button class="tab" data-type="new">Mới nhất</button>
+        <button class="tab" data-type="hot">Nổi bật</button>
+        <button class="tab" data-type="popular">Phổ biến</button>
+    </div>
+    
+    <div id="news-list" class="news-items">
+        <!-- Nội dung sẽ được tự động render bởi JavaScript -->
+    </div>
+    
+    <div class="pagination">
+        <!-- Pagination sẽ được tự động render -->
+    </div>
+</section>
 
     <!-- Footer  -->
     <footer>
@@ -128,6 +106,6 @@
     </footer>
 
     <script src="JS\main.js"></script>
-
+    <script src="JS/news_data.js"></script>
 </body>
 </html>
