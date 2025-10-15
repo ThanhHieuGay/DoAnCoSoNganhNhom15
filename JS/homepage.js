@@ -8,8 +8,11 @@ function toggleMobileMenu() {
     }
 }
 
-// Select Region (Chọn miền)
+// Select Region (Chọn miền) - FIXED
 function selectRegion(region) {
+    console.log('🔄 Chuyển sang miền:', region);
+    
+    // 1. Cập nhật active tab
     document.querySelectorAll('.region-tab').forEach(tab => {
         tab.classList.remove('active');
     });
@@ -19,71 +22,47 @@ function selectRegion(region) {
         selectedTab.classList.add('active');
     }
     
-    // Cập nhật tiêu đề theo miền
-    const regionNames = {
-        'nam': 'Miền Nam',
-        'trung': 'Miền Trung',
-        'bac': 'Miền Bắc'
-    };
-    
-    const headers = document.querySelectorAll('.status-card h2');
-    headers.forEach(h => {
-        const dateText = h.textContent.split(' - ')[1] || 'Thứ Hai, 06/10/2025';
-        h.textContent = `Kết quả xổ số ${regionNames[region]} - ${dateText}`;
+    // 2. ẨN TẤT CẢ các section
+    document.querySelectorAll('.region').forEach(section => {
+        section.style.display = 'none';
     });
     
-    console.log('Đã chọn miền:', regionNames[region]);
-}
-
-// Change Date (Thay đổi ngày)
-function changeDate(days) {
-    const currentDateEl = document.getElementById('current-date');
-    if (!currentDateEl) return;
-    
-    // Lấy ngày hiện tại từ text
-    const currentText = currentDateEl.textContent;
-    
-    // Tạo thông báo
-    if (days < 0) {
-        alert('Đang tải kết quả hôm qua...');
-    } else {
-        alert('Đang tải kết quả ngày mai...');
+    // 3. HIỂN THỊ section được chọn
+    let targetSection = null;
+    if (region === 'nam') {
+        targetSection = document.getElementById('mien-nam');
+    } else if (region === 'trung') {
+        targetSection = document.getElementById('mien-trung');
+    } else if (region === 'bac') {
+        targetSection = document.getElementById('mien-bac');
     }
     
-    // Trong thực tế, bạn sẽ gọi API để lấy dữ liệu ngày mới
-    console.log('Thay đổi ngày:', days > 0 ? 'Ngày mai' : 'Hôm qua');
-}
-
-// Show Date Picker (Hiển thị bộ chọn ngày)
-function showDatePicker() {
-    const input = document.createElement('input');
-    input.type = 'date';
-    input.style.position = 'absolute';
-    input.style.opacity = '0';
-    document.body.appendChild(input);
-    
-    input.onchange = function(e) {
-        const selected = new Date(e.target.value);
-        const options = { weekday: 'long', year: 'numeric', month: '2-digit', day: '2-digit' };
-        const formattedDate = selected.toLocaleDateString('vi-VN', options);
+    if (targetSection) {
+        targetSection.style.display = 'block';
+        console.log('✅ Đã hiển thị:', targetSection.id);
         
-        const currentDateEl = document.getElementById('current-date');
-        if (currentDateEl) {
-            currentDateEl.textContent = formattedDate;
-        }
-        
-        // Cập nhật tiêu đề các card
-        const headers = document.querySelectorAll('.status-card h2');
-        headers.forEach(h => {
-            const region = h.textContent.split(' - ')[0];
-            h.textContent = `${region} - ${formattedDate}`;
+        // 4. Reset carousel về card đầu tiên
+        const cards = targetSection.querySelectorAll('.province-card');
+        cards.forEach((card, index) => {
+            card.classList.remove('active');
+            if (index === 0) card.classList.add('active');
         });
         
-        document.body.removeChild(input);
-    };
-    
-    input.click();
+        // 5. Cập nhật indicator
+        const indicator = targetSection.querySelector('.province-indicator');
+        if (indicator && cards.length > 0) {
+            indicator.textContent = `1 / ${cards.length}`;
+        }
+        
+        // 6. Reset index
+        currentProvinceIndex = 0;
+    } else {
+        console.error('❌ Không tìm thấy section cho miền:', region);
+    }
 }
+
+// ❌ ĐÃ XÓA: changeDate() - dùng từ dayyear.js
+// ❌ ĐÃ XÓA: showDatePicker() - dùng từ dayyear.js
 
 // Countdown Timer (Đồng hồ đếm ngược)
 function updateCountdown() {
@@ -111,59 +90,19 @@ function updateCountdown() {
     }, 1000);
 }
 
-// Check Ticket (Kiểm tra vé số)
-function checkTicket(e) {
-    e.preventDefault();
-    
-    const numberInput = document.getElementById('ticket-number');
-    const resultDiv = document.getElementById('check-result');
-    
-    if (!numberInput || !resultDiv) return;
-    
-    const number = numberInput.value;
-    
-    // Dữ liệu mẫu (thay bằng dữ liệu thực từ database)
-    const winningNumbers = {
-        'dacbiet': '123456',
-        'nhat': '654321',
-        'nhi': ['112233', '445566'],
-        'ba': ['778899', '990011']
-    };
-    
-    let result = '';
-    let isWin = false;
-    
-    if (number === winningNumbers.dacbiet) {
-        result = '🎉 CHÚC MỪNG! Bạn trúng Giải Đặc Biệt!';
-        isWin = true;
-    } else if (number === winningNumbers.nhat) {
-        result = '🎊 Bạn trúng Giải Nhất!';
-        isWin = true;
-    } else if (winningNumbers.nhi.includes(number)) {
-        result = '👏 Bạn trúng Giải Nhì!';
-        isWin = true;
-    } else if (winningNumbers.ba.includes(number)) {
-        result = '✨ Bạn trúng Giải Ba!';
-        isWin = true;
-    } else {
-        result = '❌ Rất tiếc, số này không trúng giải.';
-        isWin = false;
-    }
-    
-    resultDiv.className = 'check-result ' + (isWin ? 'win' : 'lose');
-    resultDiv.textContent = result;
-    resultDiv.style.display = 'block';
-}
-
 // Simulate Status Changes (Giả lập trạng thái)
 function simulateLiveStatus() {
-    document.getElementById('status-waiting').style.display = 'none';
-    document.getElementById('status-live').style.display = 'block';
+    const statusWaiting = document.getElementById('status-waiting');
+    const statusLive = document.getElementById('status-live');
+    const statusComplete = document.getElementById('status-complete');
+    
+    if (statusWaiting) statusWaiting.style.display = 'none';
+    if (statusLive) statusLive.style.display = 'block';
     
     // Sau 30 giây chuyển sang trạng thái hoàn thành
     setTimeout(() => {
-        document.getElementById('status-live').style.display = 'none';
-        document.getElementById('status-complete').style.display = 'block';
+        if (statusLive) statusLive.style.display = 'none';
+        if (statusComplete) statusComplete.style.display = 'block';
     }, 30000);
 }
 
@@ -175,14 +114,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // Hiển thị trạng thái mặc định (có thể thay đổi tùy theo thời gian thực)
     // Để demo, ta hiển thị kết quả hoàn chỉnh
     setTimeout(() => {
-        document.getElementById('status-waiting').style.display = 'none';
-        document.getElementById('status-complete').style.display = 'block';
+        const statusWaiting = document.getElementById('status-waiting');
+        const statusComplete = document.getElementById('status-complete');
+        
+        if (statusWaiting) statusWaiting.style.display = 'none';
+        if (statusComplete) statusComplete.style.display = 'block';
     }, 1000);
     
-    // Tự động phát hiện vị trí và chọn miền phù hợp
-    // (Trong thực tế, dùng geolocation API)
     console.log('Trang chủ đã tải xong');
 });
+
 // ==== CẢI TIẾN CHỨC NĂNG TRA CỨU ====
 
 // Danh sách tỉnh theo miền
@@ -193,17 +134,23 @@ const provinces = {
 };
 
 // Cập nhật dropdown tỉnh khi chọn miền
-document.getElementById('check-mien')?.addEventListener('change', function() {
-    const mien = this.value;
-    const tinhSelect = document.getElementById('check-tinh');
+document.addEventListener('DOMContentLoaded', function() {
+    const checkMienSelect = document.getElementById('check-mien');
     
-    if (!tinhSelect) return;
-    
-    tinhSelect.innerHTML = '<option value="">-- Chọn tỉnh/thành --</option>';
-    
-    if (mien && provinces[mien]) {
-        provinces[mien].forEach(tinh => {
-            tinhSelect.innerHTML += `<option value="${tinh}">${tinh}</option>`;
+    if (checkMienSelect) {
+        checkMienSelect.addEventListener('change', function() {
+            const mien = this.value;
+            const tinhSelect = document.getElementById('check-tinh');
+            
+            if (!tinhSelect) return;
+            
+            tinhSelect.innerHTML = '<option value="">-- Chọn tỉnh/thành --</option>';
+            
+            if (mien && provinces[mien]) {
+                provinces[mien].forEach(tinh => {
+                    tinhSelect.innerHTML += `<option value="${tinh}">${tinh}</option>`;
+                });
+            }
         });
     }
 });
@@ -230,38 +177,83 @@ function checkTicket(e) {
     
     // Dữ liệu mẫu (thay bằng API thực tế)
     const winningNumbers = {
-        'dacbiet': '123456',
+        'dacbiet': '363636',
         'nhat': '654321',
         'nhi': ['112233', '445566'],
-        'ba': ['778899', '990011']
+        'ba': ['778899', '990011'],
+        'tu': ['12345', '67890', '11122', '33344'],
+        'nam': ['22334', '55667', '88990'],
+        'sau': ['1122', '3344', '5566'],
+        'bay': ['778', '990', '223'],
+        'tam': ['45']
     };
     
     let result = '';
     let isWin = false;
+    let prizeType = '';
     
     if (number === winningNumbers.dacbiet) {
-        result = `🎉 CHÚC MỪNG! Bạn trúng Giải Đặc Biệt tại ${tinh} ngày ${date}!`;
+        result = `🎉 CHÚC MỪNG! Bạn trúng Giải Đặc Biệt tại ${tinh} ngày ${formatDateVN(date)}!`;
         isWin = true;
+        prizeType = 'Đặc Biệt';
     } else if (number === winningNumbers.nhat) {
-        result = `🎊 Bạn trúng Giải Nhất tại ${tinh} ngày ${date}!`;
+        result = `🎊 Bạn trúng Giải Nhất tại ${tinh} ngày ${formatDateVN(date)}!`;
         isWin = true;
+        prizeType = 'Nhất';
     } else if (winningNumbers.nhi.includes(number)) {
-        result = `👏 Bạn trúng Giải Nhì tại ${tinh} ngày ${date}!`;
+        result = `👍 Bạn trúng Giải Nhì tại ${tinh} ngày ${formatDateVN(date)}!`;
         isWin = true;
+        prizeType = 'Nhì';
     } else if (winningNumbers.ba.includes(number)) {
-        result = `✨ Bạn trúng Giải Ba tại ${tinh} ngày ${date}!`;
+        result = `✨ Bạn trúng Giải Ba tại ${tinh} ngày ${formatDateVN(date)}!`;
         isWin = true;
+        prizeType = 'Ba';
+    } else if (winningNumbers.tu.includes(number)) {
+        result = `🎁 Bạn trúng Giải Tư tại ${tinh} ngày ${formatDateVN(date)}!`;
+        isWin = true;
+        prizeType = 'Tư';
+    } else if (winningNumbers.nam.includes(number)) {
+        result = `🌟 Bạn trúng Giải Năm tại ${tinh} ngày ${formatDateVN(date)}!`;
+        isWin = true;
+        prizeType = 'Năm';
+    } else if (winningNumbers.sau.includes(number)) {
+        result = `💫 Bạn trúng Giải Sáu tại ${tinh} ngày ${formatDateVN(date)}!`;
+        isWin = true;
+        prizeType = 'Sáu';
+    } else if (winningNumbers.bay.includes(number)) {
+        result = `⭐ Bạn trúng Giải Bảy tại ${tinh} ngày ${formatDateVN(date)}!`;
+        isWin = true;
+        prizeType = 'Bảy';
+    } else if (winningNumbers.tam.includes(number)) {
+        result = `🎯 Bạn trúng Giải Tám tại ${tinh} ngày ${formatDateVN(date)}!`;
+        isWin = true;
+        prizeType = 'Tám';
     } else {
-        result = `❌ Rất tiếc, số ${number} không trúng giải tại ${tinh} ngày ${date}.`;
+        result = `❌ Rất tiếc, số ${number} không trúng giải tại ${tinh} ngày ${formatDateVN(date)}.`;
         isWin = false;
     }
     
     resultDiv.className = 'check-result ' + (isWin ? 'win' : 'lose');
-    resultDiv.textContent = result;
+    resultDiv.innerHTML = `
+        <div style="padding: 20px; text-align: center;">
+            <p style="font-size: 1.2em; margin-bottom: 10px;">${result}</p>
+            ${isWin ? `<p style="color: #4CAF50; font-weight: bold;">Giải: ${prizeType}</p>` : ''}
+            <small style="color: #666;">Vui lòng mang vé gốc đến đại lý để nhận thưởng</small>
+        </div>
+    `;
     resultDiv.style.display = 'block';
     
     // Smooth scroll đến kết quả
     resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// Format ngày theo kiểu Việt Nam
+function formatDateVN(dateStr) {
+    const date = new Date(dateStr);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
 }
 
 // Toggle xem thêm giải
@@ -277,14 +269,24 @@ function toggleDetails(button) {
         button.textContent = '▲ Ẩn bớt';
     }
 }
+
 // Carousel cho kết quả xổ số
 let currentProvinceIndex = 0;
-const provinceCards = document.querySelectorAll('.results-carousel .province-card');
-const totalProvinces = provinceCards.length;
 
 function changeProvince(direction) {
+    // Lấy section đang hiển thị
+    const activeSection = document.querySelector('.region:not([style*="display: none"])');
+    if (!activeSection) return;
+    
+    const provinceCards = activeSection.querySelectorAll('.province-card');
+    const totalProvinces = provinceCards.length;
+    
+    if (totalProvinces === 0) return;
+    
+    // Xóa active cũ
     provinceCards[currentProvinceIndex].classList.remove('active');
     
+    // Tính index mới
     currentProvinceIndex += direction;
     
     if (currentProvinceIndex < 0) {
@@ -293,28 +295,23 @@ function changeProvince(direction) {
         currentProvinceIndex = 0;
     }
     
+    // Thêm active mới
     provinceCards[currentProvinceIndex].classList.add('active');
     
     // Cập nhật indicator
-    const indicator = document.getElementById('province-indicator');
+    const indicator = activeSection.querySelector('.province-indicator');
     if (indicator) {
         indicator.textContent = `${currentProvinceIndex + 1} / ${totalProvinces}`;
     }
-    
-    // Cập nhật nút prev/next
-    updateCarouselButtons();
 }
 
-function updateCarouselButtons() {
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    
- 
+// Reset index khi chuyển miền
+function resetProvinceIndex() {
+    currentProvinceIndex = 0;
 }
 
-// Khởi tạo carousel
-document.addEventListener('DOMContentLoaded', function() {
-    if (provinceCards.length > 0) {
-        updateCarouselButtons();
-    }
-});
+// Export các hàm để dùng trong HTML
+window.checkTicket = checkTicket;
+window.selectRegion = selectRegion;
+window.changeProvince = changeProvince;
+window.toggleDetails = toggleDetails;

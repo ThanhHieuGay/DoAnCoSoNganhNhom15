@@ -80,72 +80,49 @@ document.getElementById('login').addEventListener('submit', (e) => {
 
 
 
-// CHECK-LOTTERY.HTML - Tra cứu vé số
-
-if (document.getElementById('check-lottery-form')) {
-    const form = document.getElementById('check-lottery-form');
-    const lotteryContainer = document.getElementById('lottery-result');
-    const lotteryBody = document.getElementById('lottery-body');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const mien = document.getElementById('mien').value;
-        const tinh = document.getElementById('tinh').value;
-        const ngay = document.getElementById('ngay').value;
-
-        // Dữ liệu giả lập
-        const ketQuaMau = {
-            dacbiet: "123456",
-            nhat: "654321",
-            nhi: ["112233", "445566"],
-            ba: ["778899", "990011"],
-            tu: ["12345", "67890", "11122", "33344", "55566", "77788", "99900"],
-            nam: ["22334", "55667", "88990"],
-            sau: ["1122", "3344", "5566"],
-            bay: ["778", "990", "223"],
-            tam: "45"
-        };
-
-        lotteryBody.innerHTML = `
-            <tr><td>Đặc Biệt</td><td class="highlight">${ketQuaMau.dacbiet}</td></tr>
-            <tr><td>Giải Nhất</td><td>${ketQuaMau.nhat}</td></tr>
-            <tr><td>Giải Nhì</td><td>${ketQuaMau.nhi.join(" - ")}</td></tr>
-            <tr><td>Giải Ba</td><td>${ketQuaMau.ba.join(" - ")}</td></tr>
-            <tr><td>Giải Tư</td><td>${ketQuaMau.tu.join(" - ")}</td></tr>
-            <tr><td>Giải Năm</td><td>${ketQuaMau.nam.join(" - ")}</td></tr>
-            <tr><td>Giải Sáu</td><td>${ketQuaMau.sau.join(" - ")}</td></tr>
-            <tr><td>Giải Bảy</td><td>${ketQuaMau.bay.join(" - ")}</td></tr>
-            <tr><td>Giải Tám</td><td>${ketQuaMau.tam}</td></tr>
-        `;
-        lotteryContainer.style.display = 'block';
-    });
-}
 
 
 
 // Buy_lottery.HTML - Trang mua vé số
 
 if (document.getElementById('ticket-list')) {
+     // Thêm các hàm helper này
+    function getTodayDate() {
+        const today = new Date();
+        return today.toISOString().split('T')[0];
+    }
+
+    function getTomorrowDate() {
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        return tomorrow.toISOString().split('T')[0];
+    }
+
+    function getDayAfterTomorrowDate() {
+        const dayAfter = new Date();
+        dayAfter.setDate(dayAfter.getDate() + 2);
+        return dayAfter.toISOString().split('T')[0];
+    }
     const ticketData = {
-        nam: [
-            { id: 1, so: '123456', gia: 10000, ngay: '2025-10-01', dai: 'TP. Hồ Chí Minh', soLuong: 50 },
-            { id: 2, so: '654321', gia: 10000, ngay: '2025-10-01', dai: 'TP. Hồ Chí Minh', soLuong: 30 },
-            { id: 3, so: '888888', gia: 10000, ngay: '2025-10-01', dai: 'Đồng Nai', soLuong: 0 },
-            { id: 4, so: '168168', gia: 10000, ngay: '2025-09-30', dai: 'TP. Hồ Chí Minh', soLuong: 10 },
-            { id: 5, so: '777777', gia: 10000, ngay: '2025-10-02', dai: 'An Giang', soLuong: 100 },
-            { id: 6, so: '999999', gia: 10000, ngay: '2025-09-30', dai: 'Đồng Nai', soLuong: 5 },
-        ],
-        trung: [
-            { id: 7, so: '234567', gia: 10000, ngay: '2025-10-01', dai: 'Khánh Hòa', soLuong: 40 },
-            { id: 8, so: '876543', gia: 10000, ngay: '2025-10-01', dai: 'Phú Yên', soLuong: 60 },
-            { id: 9, so: '888666', gia: 10000, ngay: '2025-09-30', dai: 'Huế', soLuong: 8 },
-        ],
-        bac: [
-            { id: 10, so: '345678', gia: 10000, ngay: '2025-10-01', dai: 'Hà Nội', soLuong: 70 },
-            { id: 11, so: '987654', gia: 10000, ngay: '2025-10-01', dai: 'Hải Phòng', soLuong: 0 },
-            { id: 12, so: '686868', gia: 10000, ngay: '2025-09-30', dai: 'Hà Nội', soLuong: 12 },
-        ]
-    };
+    nam: [
+        { id: 1, so: '123456', gia: 10000, ngay: getTodayDate(), dai: 'TP. Hồ Chí Minh', soLuong: 50 },
+        { id: 2, so: '654321', gia: 10000, ngay: getTomorrowDate(), dai: 'TP. Hồ Chí Minh', soLuong: 30 },
+        { id: 3, so: '888888', gia: 10000, ngay: getDayAfterTomorrowDate(), dai: 'Đồng Nai', soLuong: 0 },
+        { id: 4, so: '168168', gia: 10000, ngay: getTodayDate(), dai: 'TP. Hồ Chí Minh', soLuong: 10 },
+        { id: 5, so: '777777', gia: 10000, ngay: getTomorrowDate(), dai: 'An Giang', soLuong: 100 },
+        { id: 6, so: '999999', gia: 10000, ngay: getDayAfterTomorrowDate(), dai: 'Đồng Nai', soLuong: 5 },
+    ],
+    trung: [
+        { id: 7, so: '234567', gia: 10000, ngay: getTodayDate(), dai: 'Khánh Hòa', soLuong: 40 },
+        { id: 8, so: '876543', gia: 10000, ngay: getTomorrowDate(), dai: 'Phú Yên', soLuong: 60 },
+        { id: 9, so: '888666', gia: 10000, ngay: getDayAfterTomorrowDate(), dai: 'Huế', soLuong: 8 },
+    ],
+    bac: [
+        { id: 10, so: '345678', gia: 10000, ngay: getTodayDate(), dai: 'Hà Nội', soLuong: 70 },
+        { id: 11, so: '987654', gia: 10000, ngay: getTomorrowDate(), dai: 'Hải Phòng', soLuong: 0 },
+        { id: 12, so: '686868', gia: 10000, ngay: getDayAfterTomorrowDate(), dai: 'Hà Nội', soLuong: 12 },
+    ]
+};
 
     const provinces = {
         nam: ['TP. Hồ Chí Minh', 'Đồng Nai', 'An Giang', 'Bình Dương'],
@@ -258,68 +235,164 @@ if (document.getElementById('ticket-list')) {
         }).join('');
     }
 
-    window.addToCart = function(ticketId) {
-        const allTickets = [...ticketData.nam, ...ticketData.trung, ...ticketData.bac];
-        const ticket = allTickets.find(t => t.id === ticketId);
-        
-        if (!ticket || ticket.soLuong === 0) return;
-
-        const existingItem = cart.find(item => item.id === ticketId);
-        if (existingItem) {
-            alert('Vé này đã có trong giỏ hàng!');
-            return;
-        }
-
-        cart.push({ ...ticket, quantity: 1 });
-        updateCartDisplay();
-        alert('Đã thêm vé vào giỏ hàng!');
+   window.addToCart = function(ticketId) {
+    const allTickets = [...ticketData.nam, ...ticketData.trung, ...ticketData.bac];
+    const ticket = allTickets.find(t => t.id == ticketId);
+    
+    if (!ticket || ticket.soLuong === 0) {
+        alert('Vé đã hết!');
+        return;
     }
 
-    function updateCartDisplay() {
-        document.getElementById('cart-count').textContent = cart.length;
-        
-        const cartItems = document.getElementById('cart-items');
-        if (cart.length === 0) {
-            cartItems.innerHTML = '<p class="empty-cart">Giỏ hàng trống</p>';
-            document.getElementById('cart-total').textContent = '0';
-            return;
+    // Tìm vé trong giỏ hàng theo ID
+    const existingItem = cart.find(item => item.id == ticketId);
+    
+    if (existingItem) {
+        // Nếu vé đã có trong giỏ, tăng quantity
+        if (ticket.soLuong > 0) {
+            existingItem.quantity++;
+            ticket.soLuong--;
+            updateCartDisplay();
+            loadTickets();
+            alert(`Đã thêm thêm 1 vé! Tổng: ${existingItem.quantity} vé`);
+        } else {
+            alert('Không còn đủ vé!');
         }
+        return;
+    }
 
-        cartItems.innerHTML = cart.map((item, index) => `
-            <div class="cart-item">
-                <div>
-                    <strong>${item.so}</strong><br>
-                    <small>${item.dai} - ${formatDate(item.ngay)}</small><br>
-                    <small>${item.gia.toLocaleString()} VNĐ</small>
-                </div>
+    // Thêm vé mới - chỉ lưu thông tin cần thiết
+    cart.push({ 
+        id: ticket.id,
+        so: ticket.so,
+        gia: ticket.gia,
+        ngay: ticket.ngay,
+        dai: ticket.dai,
+        quantity: 1 
+    });
+    ticket.soLuong--;
+    updateCartDisplay();
+    loadTickets();
+    alert('Đã thêm vé vào giỏ hàng!');
+}
+    function updateCartDisplay() {
+    document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+    
+    const cartItems = document.getElementById('cart-items');
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="empty-cart">Giỏ hàng trống</p>';
+        document.getElementById('cart-total').textContent = '0';
+        return;
+    }
+
+    cartItems.innerHTML = cart.map((item, index) => `
+        <div class="cart-item">
+            <div>
+                <strong>${item.so}</strong> x ${item.quantity}<br>
+                <small>${item.dai} - ${formatDate(item.ngay)}</small><br>
+                <small>${(item.gia * item.quantity).toLocaleString()} VNĐ</small>
+            </div>
+            <div>
+                <button class="btn" onclick="decreaseQuantity(${index})" style="padding: 5px 10px; margin-right: 5px;">-</button>
+                <button class="btn" onclick="increaseQuantity(${index})" style="padding: 5px 10px; margin-right: 5px;">+</button>
                 <button class="btn btn-secondary" onclick="removeFromCart(${index})">Xóa</button>
             </div>
-        `).join('');
+        </div>
+    `).join('');
 
-        const total = cart.reduce((sum, item) => sum + item.gia, 0);
-        document.getElementById('cart-total').textContent = total.toLocaleString();
+    const total = cart.reduce((sum, item) => sum + (item.gia * item.quantity), 0);
+    document.getElementById('cart-total').textContent = total.toLocaleString();
+}
+
+   window.removeFromCart = function(index) {
+    const item = cart[index];
+    const allTickets = [...ticketData.nam, ...ticketData.trung, ...ticketData.bac];
+    const ticket = allTickets.find(t => t.id == item.id);
+    
+    if (ticket) {
+        ticket.soLuong += item.quantity;
     }
+    
+    cart.splice(index, 1);
+    updateCartDisplay();
+    loadTickets();
+}
 
-    window.removeFromCart = function(index) {
-        cart.splice(index, 1);
+window.increaseQuantity = function(index) {
+    const item = cart[index];
+    const allTickets = [...ticketData.nam, ...ticketData.trung, ...ticketData.bac];
+    const ticket = allTickets.find(t => t.id == item.id);
+    
+    if (ticket && ticket.soLuong > 0) {
+        item.quantity++;
+        ticket.soLuong--;
         updateCartDisplay();
+        loadTickets();
+    } else {
+        alert('Không còn đủ vé!');
     }
+}
+
+window.decreaseQuantity = function(index) {
+    const item = cart[index];
+    const allTickets = [...ticketData.nam, ...ticketData.trung, ...ticketData.bac];
+    const ticket = allTickets.find(t => t.id == item.id);
+    
+    if (item.quantity > 1) {
+        item.quantity--;
+        if (ticket) {
+            ticket.soLuong++;
+        }
+        updateCartDisplay();
+        loadTickets();
+    } else {
+        removeFromCart(index);
+    }
+}
 
     window.toggleCart = function() {
         document.getElementById('cart-modal').classList.toggle('active');
     }
 
     window.checkout = function() {
-        if (cart.length === 0) {
-            alert('Giỏ hàng trống!');
-            return;
-        }
-
-        const total = cart.reduce((sum, item) => sum + item.gia, 0);
-        alert(`Tổng đơn hàng: ${total.toLocaleString()} VNĐ\n\nChuyển đến trang thanh toán...`);
+    if (cart.length === 0) {
+        alert('Giỏ hàng trống!');
+        return;
     }
-}
 
+    const total = cart.reduce((sum, item) => sum + (item.gia * item.quantity), 0);
+    const ticketList = cart.map(item => `${item.so} (x${item.quantity})`).join(', ');
+    alert(`Tổng đơn hàng: ${total.toLocaleString()} VNĐ\nVé đã mua: ${ticketList}\n\nChuyển đến trang thanh toán...`);
+    
+    // Xóa giỏ hàng sau khi thanh toán
+    cart = [];
+    updateCartDisplay();
+    loadTickets();
+}
+}
+//time bán hàng
+updateProvinceFilter();
+loadTickets();
+updateCartDisplay();
+
+// Thêm đoạn này để giới hạn ngày
+setDateRange();
+
+function setDateRange() {
+    const dateInput = document.getElementById('filter-date');
+    const today = new Date();
+    
+    // Ngày mốt (2 ngày sau)
+    const dayAfterTomorrow = new Date(today);
+    dayAfterTomorrow.setDate(today.getDate() + 2);
+    
+    // Format ngày YYYY-MM-DD
+    const minDate = today.toISOString().split('T')[0];  // Hôm nay
+    const maxDate = dayAfterTomorrow.toISOString().split('T')[0];  // Ngày mốt
+    
+    dateInput.setAttribute('min', minDate);
+    dateInput.setAttribute('max', maxDate);
+}
 
 // SCHEDULE.HTML - Lịch mở thưởng
 
@@ -579,27 +652,3 @@ if (document.getElementById('admin-section')) {
     // Quản lý vé số
     loadList('veso-list', 'lotteryHistory');
 }
-// Code để highlight tab active dựa trên trang hiện tại
-document.addEventListener('DOMContentLoaded', () => {
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('nav ul li a');
-
-    navLinks.forEach(link => {
-        const linkHref = link.getAttribute('href').split('/').pop();
-        if (linkHref === currentPage) {
-            link.classList.add('active');
-        } else {
-            link.classList.remove('active');
-        }
-    });
-});
-// Thu nhỏ header khi cuộn
-window.addEventListener('scroll', function() {
-    const header = document.getElementById('main-header');
-    
-    if (window.scrollY > 100) {
-        header.classList.add('shrink');
-    } else {
-        header.classList.remove('shrink');
-    }
-});

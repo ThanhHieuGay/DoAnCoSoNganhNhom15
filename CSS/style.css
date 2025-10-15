@@ -847,9 +847,10 @@ header {
 
 .filter-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) auto;
     gap: 15px;
     margin-bottom: 15px;
+    align-items: end; /* Căn tất cả các item xuống dưới cùng */
 }
 
 .tabs-mien {
